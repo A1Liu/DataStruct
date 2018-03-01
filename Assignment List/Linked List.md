@@ -26,9 +26,10 @@ Due: Friday, March 2, 2018 at 9:30 am
 Make sure to copy your output as a comment at the bottom of your code prior to submitting it.
 
 
-##Program rubric:
+## Program rubric:
 
 Correctness (Robust, Integrity, Reliability), Efficiency and Generalization in:
+
 Category|Points
 -|-
 Add|out of 6 points
