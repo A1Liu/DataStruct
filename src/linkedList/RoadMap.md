@@ -15,10 +15,11 @@ General input
 1. Split string by spaces
 2. Check what the first word is
 3. Check what the second word is and/or whether the args are correct
-4. Return action/perform action
+4. Return void/perform action
 
 Add/Remove mode
-1. check whether input is integer
+1. Check whether input is integer
+2. Perform action on list
 
 ### Linked List Handler
 Method | Returns |  Description
