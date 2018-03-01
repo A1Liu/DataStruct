@@ -1,12 +1,6 @@
 # Linked List Program Plan
 
 ### User Input
-
-Command | Description
------------- | -------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
-
 Command | Description
 -- | --
 Add <number> | adds a number to the list
