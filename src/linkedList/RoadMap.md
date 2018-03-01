@@ -1,6 +1,7 @@
 # Linked List Program Plan
 
 ### User Input
+
 Commands:|
 -|-
 Add <number>| adds a number to the list
