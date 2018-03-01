@@ -7,21 +7,21 @@ My **Data Structures and Algorithms** assignments. You can run each *.java* file
 * Search and Sort - Quadratic Sort, Quick Sort, Radix Sort
 * Linked List
 
-##Calendar Program
+## Calendar Program
 
 A program that handled days of the week,
 
-##Search and Sort
+## Search and Sort
 
 A combined project with all the sorts we had to do.
 
-###Quadratic Sort
+### Quadratic Sort
 A bubble sort program that met the **Quadratic Sorting Algorithm Assignment** specifications.
 
-###Quick Sort
+### Quick Sort
 A quick sort program that met the **Quick Sort Assignment** specifications.
 
-###Radix Sort
+### Radix Sort
 A radix sort program that met the **Radix Sort Assignment** specifications.
 
-##Linked List
+## Linked List
