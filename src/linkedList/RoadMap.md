@@ -5,9 +5,10 @@ Command | Description
 -- | --
 add <number> | adds a number to the list
 addmode | goes into adding mode. Escape character is exit, or use a different command to escape
-rm <number> | remmoves a number from the list
+rm <number> | removes a number from the list
 remode | goes into remove mode. Escape character is exit, or use a different command to escape
-rm all | delete the entire listprint | prints out the list
+rm all | delete the entire list
+print | prints out the list
 exit | escape the program
 
 ### User Input Handler
