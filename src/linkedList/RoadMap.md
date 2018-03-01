@@ -7,18 +7,24 @@ Add <number> | adds a number to the list
 adMode | goes into adding mode. Escape character is esc, or use a command to escape
 rm <number> | remmoves a number from the list
 reMode | goes into remove mode. Escape character is esc, or use a command to escape
-  
-Starting with an empty list of Integer references, allow the user to input additions and deletions to the list, keeping it in order.
+rm all | delete the entire listprint | prints out the list
+exit | escape the program
 
-The inputs should be checked through Exception Handling to ensure that they are Integers.
+### User Input Handler
+General input
+1. Split string by spaces
+2. Check what the first word is
+3. Check what the second word is and/or whether the args are correct
+4. Return action/perform action
 
-If a number to be added is already there, print “Already on List”, and do not add it.
+Add/Remove mode
+1. check whether input is integer
 
-If a number to be deleted is not on the list, print “Not on List”.
-
-At any time, be able to print the list. If the list is empty, print “List is empty.”
-
-You should also have a command to delete the entire list, and another command to quit the program.
-
-Make sure to include JavaDoc commenting for all methods. Also, main( ) should be in its own .java file.
-
+### Linked List Handler
+Method | Returns |  Description
+-|-|-
+checkNum(int number)|ListNode<E>|Checks to see if number is in the list.
+deleteAll()|void|Deletes all the elements
+delete(int number)|void|Deletes element from the list that matches number
+add(int number)|void|Adds number to the list
+toString()|String|Returns the list of all elements
