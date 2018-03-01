@@ -1,7 +1,7 @@
 # Linked List Program
 Due: Friday, March 2, 2018 at 9:30 am
 
-## Requirements:
+#### Requirements:
 * Starting with an empty list of Integer references, allow the user to input additions and deletions to the list, keeping it in order.
 * The inputs should be checked through Exception Handling to ensure that they are Integers.
 * If a number to be added is already there, print “Already on List”, and do not add it.
@@ -23,19 +23,19 @@ Due: Friday, March 2, 2018 at 9:30 am
 
 Make sure to copy your output as a comment at the bottom of your code prior to submitting it.
 
-## Program rubric:
+#### Program Rubric:
 Correctness (Robust, Integrity, Reliability), Efficiency and Generalization in:
 
 Category|Points
 -|-
-Add|out of 6 points
-Delete|out of 4 points
-Print List|out of 2 points
-Organization of main()|out of 2.5 points
-Modularity and Parameters|out of 2 points
-User Friendliness|out of 1 points
-Program Readability|out of 1 point
-Documentation|out of 1 point
-Output Format|out of 1/2 point
+Add|______ out of 6 points
+Delete|______ out of 4 points
+Print List|______ out of 2 points
+Organization of main()|______ out of 2.5 points
+Modularity and Parameters|______ out of 2 points
+User Friendliness|______ out of 1 points
+Program Readability|______ out of 1 point
+Documentation|______ out of 1 point
+Output Format|______ out of 1/2 point
 Late|1 point off per class period 
-(Remember that all quizzes must also be completed)|TOTAL  ______   out of 20 points
+(Remember that all quizzes must also be completed)|TOTAL  ______ out of 20 points
