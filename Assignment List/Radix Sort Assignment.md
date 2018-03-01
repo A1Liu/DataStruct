@@ -7,7 +7,7 @@ For this assignment, you will be implementing a radix sort algorithm.  These are
 * Develop a radix sort algorithm with the following requirements:
   * It should be a static method
   * It should use ArrayLists as buckets
-* You may need to break some tasks into other methods
+  * You may need to break some tasks into other methods
 * Use a separate runner class to run the program
 * You must use JavaDoc commenting
 
