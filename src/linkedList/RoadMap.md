@@ -2,12 +2,12 @@
 
 ### User Input
 
-Commands: | 
+Command | Description
 ------------ | -------------
 Content from cell 1 | Content from cell 2
 Content in the first column | Content in the second column
 
-Commands: | 
+Command | Description
 -- | --
 Add <number> | adds a number to the list
 adMode | goes into adding mode. Escape character is esc, or use a command to escape
