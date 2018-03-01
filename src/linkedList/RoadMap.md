@@ -2,12 +2,12 @@
 
 ### User Input
 
-Commands: |
+Commands: | 
 -- | --
-Add <number>| adds a number to the list
-adMode| goes into adding mode. Escape character is esc, or use a command to escape
-rm <number>|remmoves a number from the list
-reMode| goes into remove mode. Escape character is esc, or use a command to escape
+Add <number> | adds a number to the list
+adMode | goes into adding mode. Escape character is esc, or use a command to escape
+rm <number> | remmoves a number from the list
+reMode | goes into remove mode. Escape character is esc, or use a command to escape
   
 Starting with an empty list of Integer references, allow the user to input additions and deletions to the list, keeping it in order.
 
