@@ -7,13 +7,13 @@ In this project, you will develop and test a CalendarDate class.  Here are the r
 * Return, in String form, the date prior to this CalendarDate object; for example, if this CalendarDate object represents January 1, 2018, the return value would be "December 31, 2017".
 * Return, in String form, the day of the week on which this CalendarDate object falls; for example, if this CalendarDate object represents the date December 20, 2017, the return value would be "Wednesday." (HINT: Mathematically, the day of the week can be determined from any calendar date)
 
-## Part 1
+#### Part 1
 Create method specifications for the above responsibilities (in JavaDoc notation)
 
-## Part 2
+#### Part 2
 Develop the CalendarDate class; that is, determine what fields to declare and then define the methods.
 
-## Part 3
+#### Part 3
 Create a project to test your CalendarDate class.  Call each CalendarDate method at least twice.
 
 Upload your completed files along with your output from testing the program, copied as a comment at the bottom of the program.
