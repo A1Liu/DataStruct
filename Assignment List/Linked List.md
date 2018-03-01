@@ -41,5 +41,5 @@ User Friendliness|out of 1 points
 Program Readability|out of 1 point
 Documentation|out of 1 point
 Output Format|out of 1/2 point
-Late (1 point off per class period)| 
+Late|1 point off per class period 
 (Remember that all quizzes must also be completed)|TOTAL  ______   out of 20 points
