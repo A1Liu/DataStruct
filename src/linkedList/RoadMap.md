@@ -3,10 +3,10 @@
 ### User Input
 Command | Description
 -- | --
-Add <number> | adds a number to the list
-adMode | goes into adding mode. Escape character is esc, or use a command to escape
+add <number> | adds a number to the list
+addmode | goes into adding mode. Escape character is exit, or use a different command to escape
 rm <number> | remmoves a number from the list
-reMode | goes into remove mode. Escape character is esc, or use a command to escape
+remode | goes into remove mode. Escape character is exit, or use a different command to escape
 rm all | delete the entire listprint | prints out the list
 exit | escape the program
 
