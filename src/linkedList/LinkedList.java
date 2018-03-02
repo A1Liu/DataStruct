@@ -135,5 +135,18 @@ public class LinkedList<E> {
 		}
 		return output + "]";
 	}
-
+	
+	/**
+	 * reverses a list
+	 * @param reverseThis the current node the method is calling
+	 */
+	public void reverseList(ListNode<E> reverseThis){
+		if (reverseThis.getNext() == null) {
+			front = reverseThis;
+			return;
+		}
+			reverseList(reverseThis.getNext());
+			reverseThis.getNext().setNext(reverseThis);
+			reverseThis.setNext(null);
+	}
 }
