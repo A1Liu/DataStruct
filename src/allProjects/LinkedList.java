@@ -1,10 +1,11 @@
-package linkedList;
+package allProjects;
 
+import linkedList.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Runner {
+public class LinkedList {
 	
 	public static void main(String[] args) throws IOException {
 		
@@ -40,15 +41,15 @@ public class Runner {
 				break;
 			case -2:
 				mode = 2;
-				System.out.println("You're now in 'add' mode. Typing numbers into the command line will now add them to the list.");
+				System.out.println("You're now in 'add' mode. Typing numbers into the command line will add them to the list.");
 				break;
 			case -3:
 				mode = 3;
-				System.out.println("You're now in 'remove' mode. Typing numbers into the command line will now remove them from the list.");
+				System.out.println("You're now in 'remove' mode. Typing numbers into the command line will remove them from the list.");
 				break;
 			case -4:
 				mode = 0;
-				System.out.println("You're now in standard mode. To add or remove elements from the list, use the 'add' and 'rm' commands.");
+				System.out.println("You're now in standard mode.");
 				break;
 			default:
 				break;

@@ -2,7 +2,7 @@ package linkedList;
 
 public class UserInputHandler {
 	public LinkedList<Integer> list = new LinkedList<Integer>();
-	//Returns an error code or an exit code
+
 	/*
 	 * codes:
 	 * -4 exit remove/add mode
@@ -14,11 +14,11 @@ public class UserInputHandler {
 	 * 2 The number is already in there!
 	 * 3 The number isn't in the list!
 	 * 4 That's not an integer!
-	 * 5
 	 */
+	
 	/**
 	 * A method to execute changes to the list based on user input
-	 * @param input what the user has inputted
+	 * @param input what the user has inputed
 	 * @param mode what mode the console is currently in
 	 * @return a code describing the status of the program (what mode, whether there's an error)
 	 */
