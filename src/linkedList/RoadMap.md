@@ -4,12 +4,13 @@
 Command | Description
 -- | --
 add <number> | adds a number to the list
-addmode | goes into adding mode. Escape character is exit, or use a different command to escape
+add | goes into adding mode. Typing an integer will automatically add it to the list.
 rm <number> | removes a number from the list
-remode | goes into remove mode. Escape character is exit, or use a different command to escape
+rm | goes into remove mode. Typing an integer will automatically remove it from the list.
 rm all | delete the entire list
+close | exits remove/add mode.
 print | prints out the list
-exit | escape the program
+exit | exit the program
 
 ### User Input Handler
 General input

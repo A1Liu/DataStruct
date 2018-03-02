@@ -1,46 +1,59 @@
 package linkedList;
-/*
-Requirements:
-Starting with an empty list of Integer references, allow the user to input additions and deletions to the list, keeping it in order.
-The inputs should be checked through Exception Handling to ensure that they are Integers.
-If a number to be added is already there, print “Already on List”, and do not add it.
-If a number to be deleted is not on the list, print “Not on List”.
-At any time, be able to print the list. If the list is empty, print “List is empty.”
-You should also have a command to delete the entire list, and another command to quit the program.
-Make sure to include JavaDoc commenting for all methods. Also, main( ) should be in its own .java file.
-*/
-public class Runner {
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Runner {
 	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Integer a = 1;
-		LinkedList<Integer> albert = new LinkedList<Integer>();
-		ListNode<Integer> james2 = new ListNode<Integer>(2);
-		ListNode<Integer> james3 = new ListNode<Integer>(3);
-		ListNode<Integer> james4 = new ListNode<Integer>(4);
-		ListNode<Integer> james5 = new ListNode<Integer>(5);
-		ListNode<Integer> james6 = new ListNode<Integer>(6);
-		ListNode<Integer> james7 = new ListNode<Integer>(7);
+	public static void main(String[] args) throws IOException {
 		
-		//albert.getFront().setNext(james2);
-		james2.setNext(james3);
-		james3.setNext(james4);
-		james4.setNext(james5);
-		james5.setNext(james6);
-		james6.setNext(james7);
+		BufferedReader consoleLine = new BufferedReader(new InputStreamReader(System.in));
+		boolean turnedOn = true;
+		int mode = 0;
+		UserInputHandler handler = new UserInputHandler();
+		String userInput = "";
 		
-		//System.out.println(albert.findElement(7).toString());
-		
-		//albert.addElement(3);
-		//albert.addElement(3);
-		//System.out.println(james4.getNext().getData());
-		
-		System.out.println(albert.toString());
-		
-		
-	
+		while(turnedOn) {
+			try {
+				userInput = consoleLine.readLine();
+			} catch (IOException e) {
+				System.out.println("There was a problem with that command. Try again, or type 'help' for a list of commands.");
+			}
+			
+			switch(handler.execute(userInput,mode)) {
+			case 1:
+				System.out.println("Thats not a valid command! Type 'help' for a list of commands.");
+				break;
+			case 2:
+				System.out.println("That number is already in the list!");
+				break;
+			case 3:
+				System.out.println("That number isn't in the list!");
+				break;
+			case 4:
+				System.out.println("That's not an integer!");
+				break;
+			case -1:
+				turnedOn = false;
+				System.out.println("Thanks for trying out the program!");
+				break;
+			case -2:
+				mode = 2;
+				System.out.println("You're now in 'add' mode. Typing numbers into the command line will add them to the list.");
+				break;
+			case -3:
+				mode = 3;
+				System.out.println("You're now in 'remove' mode. Typing numbers into the command line will remove them from the list.");
+				break;
+			case -4:
+				mode = 0;
+				System.out.println("You're now in standard mode.");
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 }
