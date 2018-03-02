@@ -1,4 +1,4 @@
-# Linked List Program Plan
+# Linked List Program Commands
 
 ### User Input
 Command | Description

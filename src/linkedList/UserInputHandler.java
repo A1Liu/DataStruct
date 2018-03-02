@@ -58,13 +58,13 @@ public class UserInputHandler {
 			return 0;
 		case "help":
 			System.out.println("add <number> ~ adds a number to the list."
-						  + "\nadd          ~ goes into adding mode. Typing an integer will automatically add it to the list. "
-						  + "\nrm <number>  ~ removes a number from the list." 
-						  + "\nrm           ~ goes into remove mode. Typing an integer will automatically remove it from the list."
-						  + "\nrm all       ~ delete the entire list." 
-						  + "\nclose        ~ exits remove/add mode." 
-						  + "\nprint        ~ prints out the list."
-						  + "\nexit         ~ exit the program.");
+					   	   + "\nadd          ~ goes into adding mode. Typing an integer will automatically add it to the list. "
+						   + "\nrm <number>  ~ removes a number from the list." 
+						   + "\nrm           ~ goes into remove mode. Typing an integer will automatically remove it from the list."
+						   + "\nrm all       ~ delete the entire list." 
+						   + "\nclose        ~ exits remove/add mode." 
+						   + "\nprint        ~ prints out the list."
+						   + "\nexit         ~ exit the program.");
 			return 0;
 		case "exit":
 			return -1;
