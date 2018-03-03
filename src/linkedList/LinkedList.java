@@ -54,30 +54,24 @@ public class LinkedList<E extends Comparable<E>> {
 	 * @return a 0 if successful, a 2 if unsuccessful
 	 */
 	public int addElement(E e) {
-		ListNode<E> previous = front;
 		ListNode<E> insert = new ListNode<E>(e);
 
-		if(previous == null){
+		if(front == null){
 			front = insert;
-		} else if (previous.getData().equals(e)) {
+		} else if (front.getData().equals(e)) {
 			return 2;
 		} else {
-			if(previous.compareTo(e) == 1) {
-				insert.setNext(previous);
-				front=insert;
+			ListNode<E> previous = insertTo(e);
+			try {
+			if(previous.getNext().getData().equals(e)) {
+				return 2;
 			} else {
-				previous = insertTo(e);
-				try {
-				if(previous.getNext().getData().equals(e)) {
-					return 2;
-				} else {
-					insert.setNext(previous.getNext());
-					previous.setNext(insert);
-				}
-				} catch (NullPointerException a) {
-					insert.setNext(previous.getNext());
-					previous.setNext(insert);
-				}
+				insert.setNext(previous.getNext());
+				previous.setNext(insert);
+			}
+			} catch (NullPointerException a) {
+				insert.setNext(previous.getNext());
+				previous.setNext(insert);
 			}
 		}
 		return 0;
@@ -92,8 +86,6 @@ public class LinkedList<E extends Comparable<E>> {
 		try {
 			if (e.equals(front.getData())) {
 				front = front.getNext();
-			} else if (e.equals(front.getNext().getData())) {
-				front.setNext(front.getNext().getNext());
 			} else {
 				ListNode<E> previous = insertTo(e);
 				if(previous.getNext().getData().equals(e))
