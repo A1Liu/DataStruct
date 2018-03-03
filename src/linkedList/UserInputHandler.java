@@ -71,6 +71,8 @@ public class UserInputHandler {
 		case "reverse":
 			list.reverseList(list.getFront());
 			return 0;
+		case "":
+			return 0;
 		default:
 				if(mode == 2 && errorTrap(userInput[0])) {
 					return list.addElement(Integer.parseInt(userInput[0]));

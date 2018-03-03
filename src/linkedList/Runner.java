@@ -58,52 +58,58 @@ public class Runner {
 	
 	/*
 	 * Run 1:
-a 15
-a 10
-a 25
-d 12
+add
+You're now in 'add' mode. Typing numbers into the command line will now add them to the list.
+15
+10
+25
+rm 12
 That number isn't in the list!
-a one
+add one
 That's not an integer!
-a 5
-a 20
-a 15
+5
+20
+15
 That number is already in the list!
-d 30
+rm 30
 That number isn't in the list!
-a 17
-a 16
-a 10
+17
+16
+10
 That number is already in the list!
-d 15
-d x
+rm
+You're now in 'remove' mode. Typing numbers into the command line will now remove them from the list.
+15
+rm x
 That's not an integer!
-d 10
-p
+10
+print
 [5, 16, 17, 20, 25]
-a 4
-a 0
-d 25
-d 20
-d -4
+add
+You're now in 'add' mode. Typing numbers into the command line will now add them to the list.
+4
+0
+rm 25
+rm 20
+rm -4
 That number isn't in the list!
-a 18
-a 5
+18
+5
 That number is already in the list!
-a 19
-d 0
-d 4
-p
+19
+rm 0
+rm 4
+print
 [5, 16, 17, 18, 19]
-d all
-p
+rm all
+print
 [Empty List]
-d 10
+rm 10
 That number isn't in the list!
-a 5
-a 10
-a 7
-p
+5
+10
+7
+print
 [5, 7, 10]
 exit
 Thanks for trying out the program!
@@ -112,9 +118,9 @@ Thanks for trying out the program!
 	
 	/*
 	 * Run 2:
-a 5
-d 5
-p
+add 5
+rm 5
+print
 [Empty List]
 exit
 Thanks for trying out the program!

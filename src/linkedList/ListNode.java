@@ -1,16 +1,16 @@
 package linkedList;
 
-public class ListNode<E> {
+public class ListNode<E extends Comparable<E>> implements Comparable<E> {
  
-	private Object data;
+	private E data;
     private ListNode<E> next;
 
     /**
      * constructor for a single, unconnected node
      * @param d object to put in the node
      */
-    public ListNode(Object d) {
-		this(d, null);
+    public ListNode(E e) {
+		this(e, null);
 	}
 
     /**|
@@ -18,8 +18,8 @@ public class ListNode<E> {
      * @param d object to be put in the node
      * @param n reference to another node
      */
-    public ListNode(Object d, ListNode<E> n) {
-    	data = d;
+    public ListNode(E e, ListNode<E> n) {
+    	data = e;
     	next = n;
     }
 		    
@@ -28,7 +28,7 @@ public class ListNode<E> {
      * getter for the data in the node
      * @return the data in the node
      */
-    public Object getData() {
+    public E getData() {
         return data;
     }
 
@@ -45,8 +45,8 @@ public class ListNode<E> {
      * setter for the data in the node
      * @param ob data to be put in the node
      */
-    public void setData(Object ob) {
-        data = ob;
+    public void setData(E e) {
+        data = e;
     }
     
     /**
@@ -62,14 +62,9 @@ public class ListNode<E> {
      * @param i number to compare node to
      * @return returns 1 if node is bigger, returns -1 if node is smaller, returns 0 if they're the same.
      */
-    public int compareTo(int i) {
-    	int number = ((int) data) - i;
-    	
-    	if (number==0) {
-    		return 0;
-    	} else {
-    		return number/Math.abs(number);
-    	}
+    @Override
+    public int compareTo(E e) {
+    	return data.compareTo(e);
     }
     
     /**
