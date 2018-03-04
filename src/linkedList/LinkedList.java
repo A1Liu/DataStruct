@@ -58,6 +58,9 @@ public class LinkedList<E extends Comparable<E>> {
 
 		if(front == null){
 			front = insert;
+		} else if (front.getData().compareTo(e) == 1) {
+			insert.setNext(front);
+			front = insert;
 		} else if (front.getData().equals(e)) {
 			return 2;
 		} else {
@@ -129,6 +132,42 @@ public class LinkedList<E extends Comparable<E>> {
 			reverseThis.getNext().setNext(reverseThis);
 			reverseThis.setNext(null);
 	}
+	
+	/*
+	 *Test:
+add
+You're now in 'add' mode. Typing numbers into the command line will now add them to the list.
+1
+2
+3
+4
+4
+That number is already in the list!
+56
+23
+45
+2345
+234
+5
+324That number is already in the list!
+5
+23
+45That number is already in the list!
+
+23That number is already in the list!
+5
+4325
+print
+[1, 2, 3, 4, 5, 23, 45, 56, 234, 235, 2345, 3245, 4325]
+reverse
+print
+[4325, 3245, 2345, 235, 234, 56, 45, 23, 5, 4, 3, 2, 1]
+	 * 
+	 */
+	
+	
+	
+	
 	
 	
 	/*	/**
