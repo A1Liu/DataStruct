@@ -4,8 +4,14 @@ My **Data Structures and Algorithms** assignments. You can run each *.java* file
 
 ## List of Assignments:
 * [Calendar Program](https://github.com/A1Liu/DataStruct/blob/master/README.md#calendar-program)
-* [Search and Sort](https://github.com/A1Liu/DataStruct/blob/master/README.md#search-and-sort) - Quadratic Sort, Quick Sort, Radix Sort
-* [Linked List](https://github.com/A1Liu/DataStruct/blob/master/README.md#linked-list) - Linked List, Reverse Linked List
+* [Search and Sort](https://github.com/A1Liu/DataStruct/blob/master/README.md#search-and-sort)
+  * Quadratic Sort
+  * Quick Sort
+  * Radix Sort
+* [Linked List](https://github.com/A1Liu/DataStruct/blob/master/README.md#linked-list)
+  * Linked List
+  * Reverse Linked List
+* [Doubly Linked List](https://github.com/A1Liu/DataStruct/blob/master/README.md#doubly-linked-list-package)
 
 ## Calendar Package
 
@@ -28,3 +34,6 @@ A radix sort program that met the **[Radix Sort Program](https://github.com/A1Li
 A program that met the **[Linked List Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Linked%20List.md)** specifications.
 
 Also includes a method that met the **[Reverse Linked List](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Reverse%20Linked%20List.md)** specifications.
+
+## Doubly Linked List Package
+A program that met the **[Doubly Linked List Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Doubly-Linked%20List.md)** specifications.
