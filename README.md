@@ -3,12 +3,12 @@
 My **Data Structures and Algorithms** assignments. You can run each *.java* file in the "runners" package, or run each *Runner.java* file individually.
 
 ## List of Assignments:
-* [Calendar Program](https://github.com/A1Liu/DataStruct/blob/master/README.md#calendar-program)
-* [Search and Sort](https://github.com/A1Liu/DataStruct/blob/master/README.md#search-and-sort)
+* [Calendar Program](https://github.com/A1Liu/DataStruct/blob/master/README.md#calendar-package)
+* [Search and Sort](https://github.com/A1Liu/DataStruct/blob/master/README.md#search-and-sort-package)
   * Quadratic Sort
   * Quick Sort
   * Radix Sort
-* [Linked List](https://github.com/A1Liu/DataStruct/blob/master/README.md#linked-list)
+* [Linked List](https://github.com/A1Liu/DataStruct/blob/master/README.md#linked-list-package)
   * Linked List
   * Reverse Linked List
 * [Doubly Linked List](https://github.com/A1Liu/DataStruct/blob/master/README.md#doubly-linked-list-package)
