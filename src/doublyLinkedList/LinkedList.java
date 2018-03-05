@@ -60,7 +60,7 @@ public class LinkedList<E extends Comparable<E>> {
 			front = insert;
 		} else if (front.getData().compareTo(e) == 1) {
 			insert.setNext(front);
-			front.setPrev();
+			front.setPrev(insert);
 			front = insert;
 		} else if (front.getData().equals(e)) {
 			return 2;
@@ -71,11 +71,15 @@ public class LinkedList<E extends Comparable<E>> {
 				return 2;
 			} else {
 				insert.setNext(previous.getNext());
+				previous.setPrev(insert);
 				previous.setNext(insert);
+				insert.setPrev(previous);
 			}
 			} catch (NullPointerException a) {
 				insert.setNext(previous.getNext());
+				previous.setPrev(insert);
 				previous.setNext(insert);
+				insert.setPrev(previous);
 			}
 		}
 		return 0;
