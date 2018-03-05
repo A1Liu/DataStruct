@@ -1,6 +1,6 @@
 package doublyLinkedList;
 
-public class LinkedList<E extends Comparable<E>> {
+public class DoublyLinkedList<E extends Comparable<E>> {
 
 	private ListNode<E> front;
 	
@@ -8,14 +8,14 @@ public class LinkedList<E extends Comparable<E>> {
 	 * constructor for list with 1 element
 	 * @param e first element of list
 	 */
-	public LinkedList(E e) {
+	public DoublyLinkedList(E e) {
 		front = new ListNode<E>(e);
 	}
 	
 	/**
 	 * default constructor for empty list
 	 */
-	public LinkedList() {
+	public DoublyLinkedList() {
 		front = null;
 	}
 	

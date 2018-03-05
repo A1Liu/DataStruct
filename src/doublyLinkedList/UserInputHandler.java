@@ -1,7 +1,7 @@
 package doublyLinkedList;
 
 public class UserInputHandler {
-	public LinkedList<Integer> list = new LinkedList<Integer>();
+	public DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
 
 	/*
 	 * codes:
