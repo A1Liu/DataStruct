@@ -45,5 +45,4 @@ public class Person {
 		this.employer = employer;
 	}
 	
-	
 }

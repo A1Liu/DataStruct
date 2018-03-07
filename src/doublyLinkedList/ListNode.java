@@ -25,7 +25,6 @@ public class ListNode<E extends Comparable<E>> implements Comparable<E> {
     	prev = p;
     }
 		    
-    // access to fields
     /**
      * getter for the data in the node
      * @return the data in the node
@@ -74,7 +73,6 @@ public class ListNode<E extends Comparable<E>> implements Comparable<E> {
     public void setPrev(ListNode<E> p) {
     	prev = p;
     }
-    
     
     /**
      * 

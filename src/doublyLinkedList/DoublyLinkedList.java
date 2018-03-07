@@ -49,6 +49,19 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 	}
 
 	/**
+	 * 
+	 * @param e the number we need to add or remove
+	 * @return the position of that number, or null if it isn't in there
+	 */
+	public ListNode<E> insertFromBack(E e) {
+		ListNode<E> current = front.getPrev();
+		while(current.getPrev().compareTo(e)==1) {
+			current = current.getPrev();
+		}
+		return current;
+	}
+	
+	/**
 	 * adds the element e if it's not already in the list
 	 * @param e the element that we want to add
 	 * @return a 0 if successful, a 2 if unsuccessful
@@ -60,52 +73,88 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 			front = insert;
 		} else if (front.getData().compareTo(e) == 1) {
 			insert.setNext(front);
+			insert.setPrev(front.getPrev());
 			front.setPrev(insert);
 			front = insert;
 		} else if (front.getData().equals(e)) {
 			return 2;
 		} else {
 			ListNode<E> previous = insertTo(e);
-			try {
+			//try {
 			if(previous.getNext().getData().equals(e)) {
 				return 2;
 			} else {
 				insert.setNext(previous.getNext());
-				previous.setPrev(insert);
+				previous.getNext().setPrev(insert);
 				previous.setNext(insert);
 				insert.setPrev(previous);
 			}
+		/*	} catch (NullPointerException a) {
+				insert.setNext(previous.getNext());
+				previous.getNext().setPrev(insert);
+				previous.setNext(insert);
+				insert.setPrev(previous);
+			}*/
+		}
+		return 0;
+	}
+
+	/**
+	 * adds the element e if it's not already in the list
+	 * @param e the element that we want to add
+	 * @return a 0 if successful, a 2 if unsuccessful
+	 */
+	public int addElement2(E e, boolean fromFront) {
+		ListNode<E> insert = new ListNode<E>(e);
+
+		if(front == null){
+			front = insert;
+		} else if (front.getData().compareTo(e) == 1) {
+			insert.setNext(front);
+			insert.setPrev(front.getPrev());
+			front.setPrev(insert);
+			front = insert;
+		} else if (front.getData().equals(e)) {
+			return 2;
+		} else {
+			ListNode<E> previous;
+			if(fromFront) {
+				previous = insertTo(e);
+				if(previous.getNext().getData().equals(e)) {
+					return 2;
+				} else {
+					insert.setNext(previous.getNext());
+					previous.getNext().setPrev(insert);
+					previous.setNext(insert);
+					insert.setPrev(previous);
+				}
+			} else {
+				previous = insertFromBack(e);
+				if(previous.getPrev().getData().equals(e)) {
+					return 2;
+				} else {
+					insert.setPrev(previous.getPrev());
+					previous.getPrev().setNext(insert);
+					previous.setPrev(insert);
+					insert.setNext(previous);
+				}
+			}
+
+			/*try {
 			} catch (NullPointerException a) {
 				insert.setNext(previous.getNext());
-				previous.setPrev(insert);
+				previous.getNext().setPrev(insert);
 				previous.setNext(insert);
 				insert.setPrev(previous);
-			}
+			}*/
 		}
 		return 0;
 	}
 	
-	/**
-	 * removes the element e if it's in the list
-	 * @param e the element we want to remove
-	 * @return a 0 if successful, a 3 if unsuccessful
-	 */
-	public int remElement(E e) {
-		try {
-			if (e.equals(front.getData())) {
-				front = front.getNext();
-			} else {
-				ListNode<E> previous = insertTo(e);
-				if(previous.getNext().getData().equals(e))
-					previous.setNext(previous.getNext().getNext());
-				else return 3;
-			}
-		} catch (NullPointerException a) {
-			return 3;
-		}
-			return 0;
-	}
-
+	
+	
+	
+	
 	/**
 	 * returns the contents of the list in string form
 	 */
@@ -123,18 +172,6 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 		}
 		return output + "]";
 	}
-	
-	/**
-	 * reverses a list
-	 * @param reverseThis the current node the method is calling
-	 */
-	public void reverseList(ListNode<E> reverseThis){
-		if (reverseThis.getNext() == null) {
-			front = reverseThis;
-			return;
-		}
-			reverseList(reverseThis.getNext());
-			reverseThis.getNext().setNext(reverseThis);
-			reverseThis.setNext(null);
-	}
 }
+
+
