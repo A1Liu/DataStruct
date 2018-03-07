@@ -42,7 +42,7 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 	 */
 	public ListNode<E> insertTo(E e) {
 		ListNode<E> current = front;
-		while(current.getNext() != null && current.getNext().compareTo(e)==-1) {
+		while(current.getNext().compareTo(e)==1) {
 			current = current.getNext();
 		}
 		return current;
@@ -55,7 +55,7 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 	 */
 	public ListNode<E> insertFromBack(E e) {
 		ListNode<E> current = front.getPrev();
-		while(current.getPrev().compareTo(e)==1) {
+		while(current.getPrev().compareTo(e)==-1) {
 			current = current.getPrev();
 		}
 		return current;
@@ -116,6 +116,11 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 			front = insert;
 		} else if (front.getData().equals(e)) {
 			return 2;
+		} else if (front.getNext() == null) {
+			front.setNext(insert);
+			insert.setNext(front);
+			front.setPrev(insert);
+			insert.setPrev(front);
 		} else {
 			ListNode<E> previous;
 			if(fromFront) {
@@ -140,7 +145,7 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 				}
 			}
 
-			/*try {
+			/*
 			} catch (NullPointerException a) {
 				insert.setNext(previous.getNext());
 				previous.getNext().setPrev(insert);

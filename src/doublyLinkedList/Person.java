@@ -1,6 +1,6 @@
 package doublyLinkedList;
 
-public class Person {
+public class Person implements Comparable<Person> {
 	private String firstName;
 	private String lastName;
 	private String employer;
@@ -43,6 +43,14 @@ public class Person {
 
 	public void setEmployer(String employer) {
 		this.employer = employer;
+	}
+	
+	public int compareTo(Person e) {
+		return this.getLastName().compareTo(e.getLastName());
+	}
+	
+	public String toString() {
+		return "Name: " + firstName + " " + lastName + "\nEmployer: " + employer;
 	}
 	
 }
