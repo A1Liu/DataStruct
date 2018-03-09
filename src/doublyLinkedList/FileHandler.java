@@ -3,11 +3,9 @@ import java.io.*;
 
 public class FileHandler {
 	
-	public DoublyLinkedList<Person> list = new DoublyLinkedList<Person>();
+	public DoublyLinkedList<Person> list;
 	
-	public FileHandler() {
-		
-	}
+	public FileHandler() {list = new DoublyLinkedList<Person>();}
 	
 	/**
 	 * Parses a formatted input string into a Person object
@@ -44,14 +42,11 @@ public class FileHandler {
 			} else if (!inputString.equals("") && rowHandler(inputString) == null) {
 				System.out.println("Skipped line " + line + ": incorrect number of arguments.");
 			}
-				
 			
 			inputString = inFile.readLine();
 			line++;
 		}
-		
 		inFile.close();
-		
 	}
 	
 }

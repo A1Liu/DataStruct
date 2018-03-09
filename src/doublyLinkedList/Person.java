@@ -97,7 +97,8 @@ public class Person implements Comparable<Person> {
 	 * @return a string describing the person
 	 */
 	public String toString() {
-		return "Name: " + firstName + " " + lastName + "\n\tEmployer: " + employer;
+		return "Name:       " + firstName + " " + lastName + 
+			 "\n  Employer: " + employer;
 	}
 	
 }
