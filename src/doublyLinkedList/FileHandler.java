@@ -10,7 +10,11 @@ public class FileHandler {
 	}
 	
 	public Person rowHandler(String input) {
-		String[] names = input.split(" ");
+		String[] names = input.split(" ",3);
+		if (names.length != 3) {
+			return null;
+		}
+		
 		Person james = new Person(names[0], names[1], names[2]);
 		return james;
 	}
@@ -23,9 +27,10 @@ public class FileHandler {
 		String inputString = inFile.readLine();
 		
 		while(inputString != null) {
-			if(!inputString.equals("")) {
-				list.addElement2(rowHandler(inputString),true);
+			if(!inputString.equals("") && rowHandler(inputString) != null) {
+				list.addElement2(rowHandler(inputString),rowHandler(inputString).getLastName().compareTo("m")<0);
 			}
+				
 			
 			inputString = inFile.readLine();
 		}

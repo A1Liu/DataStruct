@@ -46,11 +46,11 @@ public class Person implements Comparable<Person> {
 	}
 	
 	public int compareTo(Person e) {
-		return this.getLastName().compareTo(e.getLastName());
+		return this.getLastName().toLowerCase().compareTo(e.getLastName().toLowerCase());
 	}
 	
 	public String toString() {
-		return "Name: " + firstName + " " + lastName + "\nEmployer: " + employer;
+		return "Name: " + firstName + " " + lastName + "\tEmployer: " + employer;
 	}
 	
 }

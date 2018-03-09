@@ -42,7 +42,7 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 	 */
 	public ListNode<E> insertTo(E e) {
 		ListNode<E> current = front;
-		while(current.getNext().compareTo(e)==1) {
+		while(current.getNext().compareTo(e)<0 && current.getNext().getNext() != front) {
 			current = current.getNext();
 		}
 		return current;
@@ -54,8 +54,8 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 	 * @return the position of that number, or null if it isn't in there
 	 */
 	public ListNode<E> insertFromBack(E e) {
-		ListNode<E> current = front.getPrev();
-		while(current.getPrev().compareTo(e)==-1) {
+		ListNode<E> current = front;
+		while(current.getPrev().compareTo(e)>0 && front.getPrev().getPrev() != front) {
 			current = current.getPrev();
 		}
 		return current;
@@ -71,14 +71,21 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 
 		if(front == null){
 			front = insert;
-		} else if (front.getData().compareTo(e) == 1) {
-			insert.setNext(front);
-			insert.setPrev(front.getPrev());
-			front.setPrev(insert);
-			front = insert;
+		} else if (front.getNext()==null) {
+			System.out.println("hi");
+			
 		} else if (front.getData().equals(e)) {
 			return 2;
-		} else {
+		} /*else if (front.getNext() == front.getPrev()) {
+			if (front.getData().compareTo(e) > 0) { //in front of everything
+				front.getNext().setNext(insert);
+				
+			} else if () { //in between
+				
+			} else {//at end
+				
+			}
+		} */else {
 			ListNode<E> previous = insertTo(e);
 			//try {
 			if(previous.getNext().getData().equals(e)) {
@@ -106,21 +113,30 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 	 */
 	public int addElement2(E e, boolean fromFront) {
 		ListNode<E> insert = new ListNode<E>(e);
-
+		
 		if(front == null){
 			front = insert;
-		} else if (front.getData().compareTo(e) == 1) {
+		}  else if (front.getNext() == null) {
+			if (front.getData().compareTo(e) > 0) {
+				front.setNext(insert);
+				front.setPrev(insert);
+				insert.setNext(front);
+				insert.setPrev(front);
+				front = insert;
+			} else {
+				front.setNext(insert);
+				front.setPrev(insert);
+				insert.setNext(front);
+				insert.setPrev(front);
+			}
+		} else if (front.getData().compareTo(e) > 0) {
 			insert.setNext(front);
 			insert.setPrev(front.getPrev());
+			front.getPrev().setNext(insert);
 			front.setPrev(insert);
 			front = insert;
 		} else if (front.getData().equals(e)) {
 			return 2;
-		} else if (front.getNext() == null) {
-			front.setNext(insert);
-			insert.setNext(front);
-			front.setPrev(insert);
-			insert.setPrev(front);
 		} else {
 			ListNode<E> previous;
 			if(fromFront) {
@@ -144,14 +160,6 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 					insert.setNext(previous);
 				}
 			}
-
-			/*
-			} catch (NullPointerException a) {
-				insert.setNext(previous.getNext());
-				previous.getNext().setPrev(insert);
-				previous.setNext(insert);
-				insert.setPrev(previous);
-			}*/
 		}
 		return 0;
 	}
@@ -165,17 +173,19 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 	 */
 	public String toString() {
 		ListNode<E> current = front;
-		String output = "[";
+		String output = "";
 		if(current != null) {
-			while(current.getNext() != null) {
-				output = output + current.toString() + ", ";
+			output = output + current.toString() + "\n";
+			current = current.getNext();
+			while(current.getNext() != front) {
+				output = output + current.toString() + "\n";
 				current = current.getNext();
 			}
 			output = output + current.toString();
 		} else {
 			output = output + "Empty List";
 		}
-		return output + "]";
+		return output;
 	}
 }
 
