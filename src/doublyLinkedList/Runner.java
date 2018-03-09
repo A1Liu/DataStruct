@@ -8,7 +8,7 @@ public class Runner {
 		FileHandler albert = new FileHandler();
 
 	try {
-			albert.readFile("input.txt");
+			albert.readFile("PersonList.txt");
 		} catch (IOException e) {
 			System.out.println("file wasn't valid!");
 		}

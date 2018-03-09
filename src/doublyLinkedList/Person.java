@@ -50,7 +50,7 @@ public class Person implements Comparable<Person> {
 	}
 	
 	public String toString() {
-		return "Name: " + firstName + " " + lastName + "\tEmployer: " + employer;
+		return "Name: " + firstName + " " + lastName + "\n\tEmployer: " + employer;
 	}
 	
 }
