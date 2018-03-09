@@ -12,7 +12,6 @@ public class Runner {
 		} catch (IOException e) {
 			System.out.println("file wasn't valid!");
 		}
-		
 		System.out.println(albert.list.toString());
 	}
 }

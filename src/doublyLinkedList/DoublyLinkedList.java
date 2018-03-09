@@ -64,54 +64,8 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 	/**
 	 * adds the element e if it's not already in the list
 	 * @param e the element that we want to add
-	 * @return a 0 if successful, a 2 if unsuccessful
 	 */
-	public int addElement(E e) {
-		ListNode<E> insert = new ListNode<E>(e);
-
-		if(front == null){
-			front = insert;
-		} else if (front.getNext()==null) {
-			System.out.println("hi");
-			
-		} else if (front.getData().equals(e)) {
-			return 2;
-		} /*else if (front.getNext() == front.getPrev()) {
-			if (front.getData().compareTo(e) > 0) { //in front of everything
-				front.getNext().setNext(insert);
-				
-			} else if () { //in between
-				
-			} else {//at end
-				
-			}
-		} */else {
-			ListNode<E> previous = insertTo(e);
-			//try {
-			if(previous.getNext().getData().equals(e)) {
-				return 2;
-			} else {
-				insert.setNext(previous.getNext());
-				previous.getNext().setPrev(insert);
-				previous.setNext(insert);
-				insert.setPrev(previous);
-			}
-		/*	} catch (NullPointerException a) {
-				insert.setNext(previous.getNext());
-				previous.getNext().setPrev(insert);
-				previous.setNext(insert);
-				insert.setPrev(previous);
-			}*/
-		}
-		return 0;
-	}
-
-	/**
-	 * adds the element e if it's not already in the list
-	 * @param e the element that we want to add
-	 * @return a 0 if successful, a 2 if unsuccessful
-	 */
-	public int addElement2(E e, boolean fromFront) {
+	public void addElement(E e, boolean fromFront) {
 		ListNode<E> insert = new ListNode<E>(e);
 		
 		if(front == null){
@@ -136,13 +90,13 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 			front.setPrev(insert);
 			front = insert;
 		} else if (front.getData().equals(e)) {
-			return 2;
+			return;
 		} else {
 			ListNode<E> previous;
 			if(fromFront) {
 				previous = insertTo(e);
 				if(previous.getNext().getData().equals(e)) {
-					return 2;
+					return;
 				} else {
 					insert.setNext(previous.getNext());
 					previous.getNext().setPrev(insert);
@@ -152,7 +106,7 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 			} else {
 				previous = insertFromBack(e);
 				if(previous.getPrev().getData().equals(e)) {
-					return 2;
+					return;
 				} else {
 					insert.setPrev(previous.getPrev());
 					previous.getPrev().setNext(insert);
@@ -161,7 +115,6 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 				}
 			}
 		}
-		return 0;
 	}
 	
 	
@@ -170,6 +123,7 @@ public class DoublyLinkedList<E extends Comparable<E>> {
 	
 	/**
 	 * returns the contents of the list in string form
+	 * @return a string with the contents of the list
 	 */
 	public String toString() {
 		ListNode<E> current = front;

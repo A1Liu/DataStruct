@@ -75,7 +75,7 @@ public class ListNode<E extends Comparable<E>> implements Comparable<E> {
     }
     
     /**
-     * 
+     * CompareTo method for data in the node
      * @param i number to compare node to
      * @return returns 1 if node is bigger, returns -1 if node is smaller, returns 0 if they're the same.
      */
@@ -85,6 +85,7 @@ public class ListNode<E extends Comparable<E>> implements Comparable<E> {
     }
     
     /**
+     * returns the data in the node as a string
      * @return the data in the node as a string
      */
     public String toString() {
