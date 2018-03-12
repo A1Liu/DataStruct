@@ -89,7 +89,7 @@ public class Person implements Comparable<Person> {
 	 * @return an integer that describes the displacement of this person's last name relative to another person's
 	 */
 	public int compareTo(Person e) {
-		return this.getLastName().toLowerCase().compareTo(e.getLastName().toLowerCase());
+		return (this.getLastName()+this.getFirstName()).toLowerCase().compareTo((e.getLastName()+e.getFirstName()).toLowerCase());
 	}
 	
 	/**
