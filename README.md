@@ -12,6 +12,7 @@ My **Data Structures and Algorithms** assignments. You can run each *.java* file
   * Linked List
   * Reverse Linked List
 * [Doubly Linked List](https://github.com/A1Liu/DataStruct/blob/master/README.md#doubly-linked-list-package)
+* [Stacks](https://github.com/A1Liu/DataStruct/blob/master/README.md#stacks-package)
 
 ## Calendar Package
 
@@ -37,3 +38,6 @@ Also includes a method that met the **[Reverse Linked List](https://github.com/A
 
 ## Doubly Linked List Package
 A program that met the **[Doubly Linked List Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Doubly-Linked%20List.md)** specifications.
+
+## Stacks Package
+A program that med the **[Stacks Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Stacks.md)** specifications.
