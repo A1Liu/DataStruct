@@ -4,14 +4,13 @@ public class ListNode<E extends Comparable<E>> implements Comparable<E> {
  
 	private E data;
     private ListNode<E> next;
-    private ListNode<E> prev;
 
     /**
      * constructor for a single, unconnected node
      * @param d object to put in the node
      */
     public ListNode(E e) {
-		this(e, null, null);
+		this(e, null);
 	}
 
     /**|
@@ -20,10 +19,9 @@ public class ListNode<E extends Comparable<E>> implements Comparable<E> {
      * @param n reference to next node
      * @param p reference to previous node
      */
-    public ListNode(E e, ListNode<E> p, ListNode<E> n) {
+    public ListNode(E e, ListNode<E> n) {
     	data = e;
     	next = n;
-    	prev = p;
     }
 		    
     /**
@@ -56,22 +54,6 @@ public class ListNode<E extends Comparable<E>> implements Comparable<E> {
      */
     public void setNext(ListNode<E> n) {
     	next = n;
-    }
-    
-    /**
-     * getter for the reference to the previous node
-     * @return reference to the previous node
-     */
-    public ListNode<E> getPrev() {
-    	return prev;
-    }
-    
-    /**
-     *  setter for the reference to the previous node
-     * @param e reference to the previous node
-     */
-    public void setPrev(ListNode<E> e) {
-    	prev = e;
     }
     
     /**
