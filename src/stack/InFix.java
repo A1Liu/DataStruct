@@ -5,6 +5,12 @@ import static stack.PostFix.postCalc;
 
 public class InFix {
 
+	/**
+	 * Converts an expression to postfix and then evaluates it
+	 * @param expression the expression to evaluate
+	 * @return integer evaluation of the expression
+	 * @throws IllegalArgumentException if the expression is formatted incorrectly
+	 */
 	public static int inCalc(String expression) throws IllegalArgumentException {
 		String[] input = parseIn(expression);
 		ArrayStack<String> operators = new ArrayStack<String>();
@@ -44,6 +50,11 @@ public class InFix {
 		return convert(operator) >= convert(stackTop);
 	}
 	
+	/**
+	 * converts the characters to numbers based on their priority to make code cleaner
+	 * @param operator the operator to convert
+	 * @return the priority level of the operator
+	 */
 	private static int convert(String operator) {
 		switch (operator) {
 		case "(":
@@ -68,7 +79,7 @@ public class InFix {
 	 * @param expression the expression to be parsed
 	 * @return an array of strings that each contain either a number or an operator
 	 */
-	public static String[] parseIn(String expression) {
+	private static String[] parseIn(String expression) {
 		return expression.replaceAll(" ","").split("(?<=[-+*/()])|(?=[-+*/()])");
 	}
 }

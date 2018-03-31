@@ -39,7 +39,7 @@ public class PostFix {
 	 * @param operand the operand
 	 * @return integer value of operation
 	 */
-	private static int operate(int b, int a, String operand) {
+	private static int operate(int b, int a, String operand) throws IllegalArgumentException {
 		switch (operand) {
 		case "*":
 			return a*b;
@@ -47,8 +47,10 @@ public class PostFix {
 			return a/b;
 		case "+":
 			return a+b;
-		default:
+		case "-":
 			return a-b;
+		default:
+			throw new IllegalArgumentException("Expression includes an invalid symbol.");
 		}
 	}
 }

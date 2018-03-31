@@ -1,16 +1,16 @@
-package stack;
+package allProjects;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class StackUtil {
-	
+public class Util {
+
 	/**
 	 * This is a utility class so the constructor is private
 	 */
-	private StackUtil() {
+	private Util() {
 		
 	}
 	
@@ -50,4 +50,3 @@ public class StackUtil {
 		return output;
 	}
 }
-
