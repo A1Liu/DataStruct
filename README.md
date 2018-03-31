@@ -14,6 +14,9 @@ My **Data Structures and Algorithms** assignments. You can run each *.java* file
 * [Doubly Linked List](https://github.com/A1Liu/DataStruct/blob/master/README.md#doubly-linked-list-package)
 * [Stacks](https://github.com/A1Liu/DataStruct/blob/master/README.md#stacks-package)
 
+## All Projects Package
+This package includes all runners for all the programs, as well as a utility class that contains methods I used very often.
+
 ## Calendar Package
 
 A program that met the **[CalendarDate Class Assignment](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/CalendarDate%20Class.md)** specifications.
@@ -40,4 +43,4 @@ Also includes a method that met the **[Reverse Linked List](https://github.com/A
 A program that met the **[Doubly Linked List Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Doubly-Linked%20List.md)** specifications.
 
 ## Stacks Package
-A program that med the **[Stacks Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Stacks.md)** specifications.
+A program that met the **[Stacks Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Stacks.md)** specifications.
