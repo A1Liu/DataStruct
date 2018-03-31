@@ -6,7 +6,7 @@ package stack;
  *
  * @param <E>
  */
-public class ArrayStack<E extends Comparable<E>> implements Stack<E> {
+public class ArrayStack<E> implements Stack<E> {
 
 	private E[] stack;
 	private int top;

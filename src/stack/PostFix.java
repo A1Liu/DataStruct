@@ -1,5 +1,7 @@
 package stack;
 
+import static stack.StackUtil.isNumber;
+
 public class PostFix {
 	
 	/**
@@ -7,20 +9,27 @@ public class PostFix {
 	 * @param expression the expression to evaluate
 	 * @return The value of the expression
 	 */
-	public static int postCalc(String expression) {
+	public static int postCalc(String expression) throws IllegalArgumentException {
 		String[] input = expression.split(" ");
 		LinkedStack<Integer> stack = new LinkedStack<Integer>();
+		
+		if (input.length == 0) throw new IllegalArgumentException("The expression was empty.");
 		
 		for (int x = 0; x< input.length; x++) {
 			if(isNumber(input[x])) {
 				stack.push(Integer.parseInt(input[x]));
 			} else {
-				int b = stack.pop();
-				int a = stack.pop();
+				Integer a = stack.pop();
+				Integer b = stack.pop();
+				if (a==null || b==null) throw new IllegalArgumentException("The expression had too many operations for the amount of numbers.");
 				stack.push(operate(a,b,input[x]));
 			}
 		}
-		return stack.pop();
+		
+		Integer answer = stack.pop();
+		if (stack.pop() != null) throw new IllegalArgumentException("The expression had too few operations for the amount of numbers.");
+		
+		return answer;
 	}
 	
 	/**
@@ -30,7 +39,7 @@ public class PostFix {
 	 * @param operand the operand
 	 * @return integer value of operation
 	 */
-	private static int operate(int a, int b, String operand) {
+	private static int operate(int b, int a, String operand) {
 		switch (operand) {
 		case "*":
 			return a*b;
@@ -41,19 +50,5 @@ public class PostFix {
 		default:
 			return a-b;
 		}
-	}
-	
-	/**
-	 * checks if a string is an integer
-	 * @param in string to test
-	 * @return true if the string can be parsed to an integer
-	 */
-	private static boolean isNumber(String in) {
-		try{
-			Integer.parseInt(in);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		return true;
 	}
 }
