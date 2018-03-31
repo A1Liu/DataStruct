@@ -1,9 +1,12 @@
 package stack;
 
-import linkedList.LinkedList;
-import linkedList.ListNode;
-
-public class LinkedStack<E extends Comparable<E>> implements Stack<E> {
+/**
+ * This class is a Reference-based implementation of the Stack Interface. It includes all stack methods and nothing else, and holds objects of type E
+ * @author Alyer
+ *
+ * @param <E>
+ */
+public class LinkedStack<E> implements Stack<E> {
 
 	private LinkedList<E> stack;
 	
@@ -13,7 +16,7 @@ public class LinkedStack<E extends Comparable<E>> implements Stack<E> {
 	
 	@Override
 	public E pop() {
-		if (stack.getFront()!=null) {
+		if (!isEmpty()) {
 			E e = stack.getFront().getData();
 			stack.setFront(stack.getFront().getNext());
 			return e;
@@ -30,12 +33,14 @@ public class LinkedStack<E extends Comparable<E>> implements Stack<E> {
 
 	@Override
 	public E peek() {
-		return stack.getFront().getData();
+		return isEmpty()
+				? null
+				: stack.getFront().getData();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return peek()==null;
+		return stack.getFront()==null;
 	}
 
 }

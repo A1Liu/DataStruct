@@ -4,7 +4,7 @@ public interface Stack<E> {
 
 	/**
 	 * pops the top item from the stack
-	 * @return the top item
+	 * @return the top item of the stack
 	 */
 	public E pop();
 
@@ -16,7 +16,7 @@ public interface Stack<E> {
 	
 	/**
 	 * looks at the top item
-	 * @return the top item
+	 * @return the top item in the stack
 	 */
 	public E peek();
 	

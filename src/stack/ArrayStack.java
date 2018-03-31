@@ -1,5 +1,11 @@
 package stack;
 
+/**
+ * This class is an Array-based implementation of the Stack Interface. It includes all stack methods and nothing else, and holds objects of type E
+ * @author Alyer
+ *
+ * @param <E>
+ */
 public class ArrayStack<E extends Comparable<E>> implements Stack<E> {
 
 	private E[] stack;
@@ -25,7 +31,7 @@ public class ArrayStack<E extends Comparable<E>> implements Stack<E> {
 
 	@Override
 	public void push(E e) {
-		stack[top++] = e;
+		stack[++top] = e;
 	}
 
 	@Override
