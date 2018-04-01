@@ -25,10 +25,8 @@ public class PostFix {
 				stack.push(operate(a,b,input[x]));
 			}
 		}
-		
 		Integer answer = stack.pop();
 		if (stack.pop() != null) throw new IllegalArgumentException("The expression had too few operations for the amount of numbers.");
-		
 		return answer;
 	}
 	

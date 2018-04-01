@@ -33,8 +33,6 @@ public class InFix {
 		}
 		while (!operators.isEmpty() && !operators.peek().equals("("))
 			postFix+=operators.pop() + " ";
-		
-		System.out.println(postFix);
 		return postCalc(postFix);
 	}
 	
