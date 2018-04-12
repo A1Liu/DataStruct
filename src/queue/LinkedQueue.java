@@ -1,5 +1,41 @@
 package queue;
 
-public class LinkedQueue {
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
+public class LinkedQueue<T> implements Queue<T> {
+
+	private LinkedList<T> queue;
+	
+	public LinkedQueue() {
+		queue = new LinkedList<T>();
+	}
+	
+	@Override
+	public void enqueue(T t) {
+		queue.addFirst(t);
+	}
+
+	@Override
+	public T front() throws NoSuchElementException {
+		if (!this.isEmpty())
+			return queue.getLast();
+		throw new NoSuchElementException("Queue is Empty!");
+	}
+
+	@Override
+	public T dequeue() throws NoSuchElementException {
+		if (!this.isEmpty()) {
+			return queue.removeLast();
+		}
+		throw new NoSuchElementException("Queue is Empty!");
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return queue.isEmpty();
+	}
+
+	
+	
 }

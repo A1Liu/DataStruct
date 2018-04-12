@@ -11,7 +11,9 @@ public class ArrayStack<E> implements Stack<E> {
 	private E[] stack;
 	private int top;
 	
-	
+	/**
+	 * default size is 10
+	 */
 	public ArrayStack() {
 		this(10);
 	}

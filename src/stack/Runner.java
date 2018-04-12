@@ -1,27 +1,53 @@
 package stack;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import static stack.StackUtil.readFile;
 import static stack.PostFix.postCalc;
 import static stack.InFix.inCalc;
 
+/**
+ * This class is the test harness for the classes in the Stack package.
+ * It is used to test the calculators in the stack package
+ * @author Alyer
+ *
+ */
 public class Runner {
+	
+	/**
+	 * Main method for Stack package, handles both InFix and PostFix inputs
+	 * @param args main method default parameter
+	 * @throws IOException If something is wrong with the file handling
+	 */
+	public static void main(String[] args) throws IOException {
+		/**/
+		System.out.println("InFix Calculator Outputs:");
+		inFix("inFix.txt");
+		/**/
+		System.out.println("PostFix Calculator Outputs:");
+		postFix("postFix.txt");
+		/**/
+	}
 
 	/**
 	 * main method for infix calculator
 	 * @param args
 	 * @throws IOException
 	 */
-	public static void main(String[] args) throws IOException {
-		ArrayList<String> expressionList = readFile("InFix.txt");
-		for (int x = 0;x < expressionList.size(); x++) {
+	private static void inFix(String input) throws IOException {
+		//"inFix.txt";
+		BufferedReader inFile = new BufferedReader(new FileReader(input));
+		String inputString = inFile.readLine();
+		int line = 1;
+		while(inputString != null) {
 			try {
-				System.out.println(expressionList.get(x) + " = " + inCalc(expressionList.get(x)));
+				System.out.println(inputString + " = " + inCalc(inputString));
 			} catch (IllegalArgumentException e) {
-				System.out.println("Error on line "+ (x + 1) + ": " + e.getMessage());
+				System.out.println("Error on line "+ line + ": " + e.getMessage());
 			}
+			inputString = inFile.readLine();
+			line++;
 		}
+		inFile.close();
 	}
 	
 	/**
@@ -29,15 +55,34 @@ public class Runner {
 	 * @param args
 	 * @throws IOException
 	 */
-	public static void main(String args) throws IOException {
-		ArrayList<String> expressionList = readFile("PostFix.txt");
-		for (int x = 0;x < expressionList.size(); x++) {
+	private static void postFix(String input) throws IOException {
+		BufferedReader inFile = new BufferedReader(new FileReader(input));
+		String inputString = inFile.readLine();
+		int line = 1;
+		while(inputString != null) {
 			try {
-				System.out.println(expressionList.get(x) + " = " + postCalc(expressionList.get(x)));
+				System.out.println(inputString + " = " + postCalc(inputString));
 			} catch (IllegalArgumentException e) {
-				System.out.println("Error on line "+ (x + 1) + ": " + e.getMessage());
+				System.out.println("Error on line "+ line + ": " + e.getMessage());
 			}
+			inputString = inFile.readLine();
+			line++;
 		}
+		inFile.close();
+	}
+	
+	/**
+	 * checks if a string is an integer
+	 * @param in string to test
+	 * @return true if the string can be parsed to an integer
+	 */
+	public static boolean isNumber(String in) {
+		try{
+			Integer.parseInt(in);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 	
 }

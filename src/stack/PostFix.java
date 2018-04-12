@@ -1,6 +1,6 @@
 package stack;
 
-import static stack.StackUtil.isNumber;
+import static stack.Runner.isNumber;
 
 public class PostFix {
 	

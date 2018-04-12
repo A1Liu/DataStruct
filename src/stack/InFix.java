@@ -1,9 +1,21 @@
 package stack;
 
-import static stack.StackUtil.isNumber;
 import static stack.PostFix.postCalc;
+import static stack.Runner.isNumber;
 
+/**
+ * This class represents an InFix Calculator. Its public method takes in an InFix expression and parses it, then evaluates it.
+ * @author Alyer
+ *
+ */
 public class InFix {
+	
+	/**
+	 * Class doesn't have private data, shouldn't need a constructor
+	 */
+	private InFix() {
+		
+	}
 
 	/**
 	 * Converts an expression to postfix and then evaluates it
@@ -58,11 +70,9 @@ public class InFix {
 		case "(":
 			return 0;
 		case "/":
-			return 1;
 		case "*":
 			return 1;
 		case "+":
-			return 2;
 		case "-":
 			return 2;
 		case ")":
