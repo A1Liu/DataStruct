@@ -46,7 +46,12 @@ public class PostFix {
 		case "*":
 			return a*b;
 		case "/":
-			return a/b;
+			try {
+				return a/b;
+			} catch (ArithmeticException e) {
+				throw new IllegalArgumentException("Can't divide by zero!");
+			}
+			
 		case "+":
 			return a+b;
 		case "-":

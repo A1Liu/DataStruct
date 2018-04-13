@@ -15,6 +15,8 @@ import static calculator.InFix.*;
  * 
  * The app takes a document of loosely formatted infix expressions and outputs the expression's postfix form and evaluation.
  * 
+ * The clss also includes a utility method called "isNumber()"
+ * 
  * @author Alyer
  *
  */
@@ -23,16 +25,18 @@ public class Runner {
 	public static void main(String[] args) throws IOException {
 		LinkedQueue<String> input = linkedQueue("Calculator Expressions.txt");
 		ArrayQueue<String> output = new ArrayQueue<String>(5);
-		int counter = 0;
+		int counter = 1;
 		String expression;
 		while (!input.isEmpty()) {
-			expression = "Problem " + counter + ":\n" + format(input.dequeue());
+			expression = "Problem " + counter + ":\n" + format(input.dequeue()) + "\n";
 			try {
 				output.enqueue(expression);
 			} catch (NoSuchElementException e) {
 				while(!output.isEmpty())
 					System.out.println(output.dequeue());
+				output.enqueue(expression);
 			}
+			counter++;
 		}
 		while(!output.isEmpty())
 			System.out.println(output.dequeue());
@@ -61,12 +65,12 @@ public class Runner {
 	 * @return formatted entry
 	 */
 	private static String format(String inFix) {
-		String expression = "Infix Input:   " + inFix + "\n" +
-							"PostFix Form:  " + toPostFix(inFix) + "\n";
+		String expression = "	Infix Input:   " + inFix + "\n" +
+							"	PostFix Form:  " + toPostFix(inFix) + "\n";
 		try {
-			expression += 	"Simplest Form: " + inCalc(inFix);
+			expression += 	"	Simplest Form: " + inCalc(inFix);
 		} catch (IllegalArgumentException e) {
-			expression += "Error: " + e.getMessage();
+			expression +=   "	Error: " + e.getMessage();
 		}
 		return expression;
 	}

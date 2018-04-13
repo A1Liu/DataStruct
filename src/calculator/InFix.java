@@ -49,8 +49,10 @@ public class InFix {
 					operators.push(input[x]);
 			}
 		}
-		while (!operators.isEmpty() && !operators.peek().equals("("))
-			postFix+=operators.pop() + " ";
+		while (!operators.isEmpty()) {
+			if (!operators.peek().equals("(") && !operators.peek().equals(")"))
+				postFix+=operators.pop() + " ";
+		}	
 		return postFix;
 	}
 	
@@ -99,8 +101,8 @@ public class InFix {
 		 */
 		return expression.replaceAll("[^0-9 +*/()-]", "").split(//Replaces all characters that aren't a number, a space, or a known operator
 				 "(?<=[-+*/()])\\s*(?=[-+*/()])"//Positive lookAround for an optional arbitrary amount of spaces surrounded by operators ("- +" or "+-")
-		 + "|" + "(?<=[-])\\s+(?=[0-9])"//Positive lookAround for an arbitrary amount of spaces preceded by a minus and followed by a number ("-   1" or "- 1")
-		 + "|" + "(?<=[0-9]\\-)\\s*"//Positive lookBehind for an optional arbitrary amount of spaces followed by a number and minus sign ("1- 1" or "1-1")
+		 + "|" + "(?<=[-])\\s+(?=[0-9()])"//Positive lookAround for an arbitrary amount of spaces preceded by a minus and followed by a number ("-   1" or "- 1")
+		 + "|" + "(?<=[0-9()]\\-)\\s*"//Positive lookBehind for an optional arbitrary amount of spaces preceded by a number and minus sign ("1- 1" or "1-1")
 		 + "|" + "(?<=[0-9])\\s*(?=[-+*/()])"//Positive lookAround for an optional arbitrary amount of spaces preceded by a number and followed by an operation ("1-" or "1 -")
 		 + "|" + "(?<=[+*/()])\\s*(?=[0-9])"//Positive lookAround for an optional arbitrary amount of spaces preceded by an operator and followed by a number ("+ 1" or "+1")
 		 + "|" + "(?<=[0-9])\\s+(?=[0-9])"//Positive lookAround for an arbitrary amount of spaces surrounded by numbers ("1    1")
