@@ -3,6 +3,12 @@ package queue;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
+/**
+ * This class represents a reference-based implementation of the Queue interface
+ * @author Alyer
+ *
+ * @param <T> The data type of the elements being held in the queue
+ */
 public class LinkedQueue<T> implements Queue<T> {
 
 	private LinkedList<T> queue;

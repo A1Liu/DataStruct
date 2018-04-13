@@ -2,6 +2,12 @@ package queue;
 
 import java.util.NoSuchElementException;
 
+/**
+ * This class represents the characteristic methods of a queue, which is a first-in-first-out (FIFO) data storage system.
+ * @author Alyer
+ *
+ * @param <T> The data type of the elements stored in the queue
+ */
 public interface Queue<T> {
 
 	/**

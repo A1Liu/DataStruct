@@ -2,6 +2,12 @@ package queue;
 
 import java.util.NoSuchElementException;
 
+/**
+ * This class represents an array-based implementation of the Queue interface.
+ * @author Alyer
+ *
+ * @param <T> Data type of the elements being held in the queue
+ */
 public class ArrayQueue<T> implements Queue<T> {
 
 	private T[] queue;

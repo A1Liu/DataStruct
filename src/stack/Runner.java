@@ -34,7 +34,6 @@ public class Runner {
 	 * @throws IOException
 	 */
 	private static void inFix(String input) throws IOException {
-		//"inFix.txt";
 		BufferedReader inFile = new BufferedReader(new FileReader(input));
 		String inputString = inFile.readLine();
 		int line = 1;

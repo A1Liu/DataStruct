@@ -4,15 +4,12 @@ import static stack.PostFix.postCalc;
 import static stack.Runner.isNumber;
 
 /**
- * This class represents an InFix Calculator. Its public method takes in an InFix expression and parses it, then evaluates it.
+ * This class represents an InFix Calculator. It contains methods to evaluate and convert infix expressions.
  * @author Alyer
  *
  */
 public class InFix {
 	
-	/**
-	 * Class doesn't have private data, shouldn't need a constructor
-	 */
 	private InFix() {
 		
 	}
@@ -24,6 +21,15 @@ public class InFix {
 	 * @throws IllegalArgumentException if the expression is formatted incorrectly
 	 */
 	public static int inCalc(String expression) throws IllegalArgumentException {
+		return postCalc(toPostFix(expression));
+	}
+	
+	/**
+	 * Converts an expression to postfix
+	 * @param expression the expression to evaluate
+	 * @return postfix conversion of expression
+	 */
+	public static String toPostFix(String expression) {
 		String[] input = parseIn(expression);
 		ArrayStack<String> operators = new ArrayStack<String>();
 		String postFix = "";
@@ -45,7 +51,7 @@ public class InFix {
 		}
 		while (!operators.isEmpty() && !operators.peek().equals("("))
 			postFix+=operators.pop() + " ";
-		return postCalc(postFix);
+		return postFix;
 	}
 	
 	/**
