@@ -1,9 +1,7 @@
-package stack;
+package calculator;
 
-import static stack.PostFix.postCalc;
-import static stack.Runner.isNumber;
-
-import calculator.ArrayStack;
+import static calculator.PostFix.postCalc;
+import static calculator.Runner.isNumber;
 
 /**
  * This class represents an InFix Calculator. It contains methods to evaluate and convert infix expressions.
@@ -109,4 +107,3 @@ public class InFix {
 		 );
 	}
 }
-

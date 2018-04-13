@@ -8,8 +8,16 @@ import java.util.NoSuchElementException;
 import queue.ArrayQueue;
 import queue.LinkedQueue;
 
-import static stack.InFix.*;
+import static calculator.InFix.*;
 
+/**
+ * This class is the runner class for the suite of classes that collectively make up the calculator application.
+ * 
+ * The app takes a document of loosely formatted infix expressions and outputs the expression's postfix form and evaluation.
+ * 
+ * @author Alyer
+ *
+ */
 public class Runner {
 	
 	public static void main(String[] args) throws IOException {
@@ -52,9 +60,28 @@ public class Runner {
 	 * @param inFix input infix expression
 	 * @return formatted entry
 	 */
-	private static String format(String inFix) { 
-		return 	"Infix Input:   " + inFix + "\n" +
-				"PostFix Form:  " + toPostFix(inFix) + "\n" +
-				"Simplest Form: " + inCalc(inFix);
+	private static String format(String inFix) {
+		String expression = "Infix Input:   " + inFix + "\n" +
+							"PostFix Form:  " + toPostFix(inFix) + "\n";
+		try {
+			expression += 	"Simplest Form: " + inCalc(inFix);
+		} catch (IllegalArgumentException e) {
+			expression += "Error: " + e.getMessage();
+		}
+		return expression;
+	}
+	
+	/**
+	 * checks if a string is an integer
+	 * @param in string to test
+	 * @return true if the string can be parsed to an integer
+	 */
+	public static boolean isNumber(String in) {
+		try{
+			Integer.parseInt(in);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 }
