@@ -23,7 +23,10 @@ public class ArrayStack<E> implements Stack<E> {
 		top = -1;
 	}
 	
-	
+	/**
+	 * pops the top item from the stack
+	 * @return the top item of the stack
+	 */
 	@Override
 	public E pop() {
 		return isEmpty()
@@ -31,11 +34,19 @@ public class ArrayStack<E> implements Stack<E> {
 				: stack[top--];
 	}
 
+	/**
+	 * pushes an item to the top of the stack
+	 * @param e the item to push
+	 */
 	@Override
 	public void push(E e) {
 		stack[++top] = e;
 	}
 
+	/**
+	 * looks at the top item
+	 * @return the top item in the stack
+	 */
 	@Override
 	public E peek() {
 		return isEmpty()
@@ -43,7 +54,10 @@ public class ArrayStack<E> implements Stack<E> {
 				: stack[top];
 	}
 
-
+	/**
+	 * checks whether the stack is empty
+	 * @return true if empty false if not
+	 */
 	@Override
 	public boolean isEmpty() {
 		return top==-1;

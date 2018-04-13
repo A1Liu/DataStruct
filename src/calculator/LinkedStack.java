@@ -1,7 +1,5 @@
 package calculator;
 
-import java.util.LinkedList;
-
 /**
  * This class is a Reference-based implementation of the Stack Interface. It includes all stack methods and nothing else, and holds objects of type E
  * @author Alyer
@@ -9,15 +7,17 @@ import java.util.LinkedList;
  * @param <E>
  */
 public class LinkedStack<E> implements Stack<E> {
-
-	private LinkedList<E> stack;
-	private StackNode<E> front;
+	
+	private Node<E> front;
 	
 	public LinkedStack() {
 		front = null;
-		stack = new LinkedList<E>();
 	}
 	
+	/**
+	 * pops the top item from the stack
+	 * @return the top item of the stack
+	 */
 	@Override
 	public E pop() {
 		if (!isEmpty()) {
@@ -29,36 +29,47 @@ public class LinkedStack<E> implements Stack<E> {
 		
 	}
 
+	/**
+	 * pushes an item to the top of the stack
+	 * @param e the item to push
+	 */
 	@Override
 	public void push(E e) {
-		front = new StackNode<E>(e,front);
-		
+		front = new Node<E>(e,front);
 	}
 
+	/**
+	 * looks at the top item
+	 * @return the top item in the stack
+	 */
 	@Override
 	public E peek() {
 		return isEmpty()
 				? null
-				: stack.getFirst();
+				: front.getData();
 	}
-
+	
+	/**
+	 * checks whether the stack is empty
+	 * @return true if empty false if not
+	 */
 	@Override
 	public boolean isEmpty() {
-		return stack.isEmpty();
+		return front == null;
 	}
 
 }
 
-class StackNode<T> {
+class Node<T> {
 	
 	private T data;
-	private StackNode<T> next;
+	private Node<T> next;
 	
-	public StackNode(T t) {
+	public Node(T t) {
 		this(t, null);
 	}
 	
-	public StackNode(T t, StackNode<T> n) {
+	public Node(T t, Node<T> n) {
 		data = t;
 		next = n;
 	}
@@ -83,7 +94,7 @@ class StackNode<T> {
 	 * getter for next node
 	 * @return the next
 	 */
-	public StackNode<T> getNext() {
+	public Node<T> getNext() {
 		return next;
 	}
 
@@ -91,7 +102,7 @@ class StackNode<T> {
 	 * setter for next node
 	 * @param next the next to set
 	 */
-	public void setNext(StackNode<T> next) {
+	public void setNext(Node<T> next) {
 		this.next = next;
 	}
 	

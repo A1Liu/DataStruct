@@ -1,6 +1,5 @@
 package calculator;
 
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 /**
@@ -11,10 +10,12 @@ import java.util.NoSuchElementException;
  */
 public class LinkedQueue<T> implements Queue<T> {
 
-	private LinkedList<T> queue;
+	private Node<T> front;
+	private Node<T> back;
 	
 	public LinkedQueue() {
-		queue = new LinkedList<T>();
+		front = null;
+		back = null;
 	}
 	
 	/**
@@ -23,7 +24,13 @@ public class LinkedQueue<T> implements Queue<T> {
 	 */
 	@Override
 	public void enqueue(T t) {
-		queue.addFirst(t);
+		if (isEmpty()) {
+			front = new Node<T>(t,null);
+			back = front;
+		} else {
+			back.setNext(new Node<T>(t,null));
+			back = back.getNext();
+		}
 	}
 
 	/**
@@ -34,7 +41,7 @@ public class LinkedQueue<T> implements Queue<T> {
 	@Override
 	public T front() throws NoSuchElementException {
 		if (!this.isEmpty())
-			return queue.getLast();
+			return front.getData();
 		throw new NoSuchElementException("Queue is Empty!");
 	}
 
@@ -46,7 +53,11 @@ public class LinkedQueue<T> implements Queue<T> {
 	@Override
 	public T dequeue() throws NoSuchElementException {
 		if (!this.isEmpty()) {
-			return queue.removeLast();
+			T data = front.getData();
+			front = front.getNext();
+			if (front == null)
+				back = null;
+			return data;
 		}
 		throw new NoSuchElementException("Queue is Empty!");
 	}
@@ -57,7 +68,7 @@ public class LinkedQueue<T> implements Queue<T> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return queue.isEmpty();
+		return back==null;
 	}
 
 	
