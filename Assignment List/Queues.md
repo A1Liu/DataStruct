@@ -1,6 +1,6 @@
 ## Part 1 - Queue Interface
 
-Create a Queue interface based on the specifications discussed in class and in the videos.  It should include only the four methods presented in the notes and video (besides size( )).  The Interface should be generalized with a type prameter (<E>).  All JavaDoc commenting is required.  
+Create a Queue interface based on the specifications discussed in class and in the videos.  It should include only the four methods presented in the notes and video (besides size( )).  The Interface should be generalized with a type prameter (\<E\>).  All JavaDoc commenting is required.  
   
 ## Part 2 - Reference-based Queue
 
