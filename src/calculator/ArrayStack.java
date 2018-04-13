@@ -18,6 +18,7 @@ public class ArrayStack<E> implements Stack<E> {
 		this(10);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayStack(int length) {
 		stack = (E[]) new Object[length];
 		top = -1;
