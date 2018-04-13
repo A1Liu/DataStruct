@@ -15,7 +15,7 @@ import static calculator.InFix.*;
  * 
  * The app takes a document of loosely formatted infix expressions and outputs the expression's postfix form and evaluation.
  * 
- * The clss also includes a utility method called "isNumber()"
+ * The class also includes a utility method called "isNumber()"
  * 
  * @author Alyer
  *
@@ -88,4 +88,53 @@ public class Runner {
 		}
 		return true;
 	}
+	
+/*
+This is the Output of the program:
+
+Problem 1:
+	Infix Input:   9*(8-5)
+	PostFix Form:  9 8 5 - * 
+	Simplest Form: 27
+
+Problem 2:
+	Infix Input:   (9-8)*5
+	PostFix Form:  9 8 - 5 * 
+	Simplest Form: 5
+
+Problem 3:
+	Infix Input:   3/(4*(5-(2+1)))
+	PostFix Form:  3 4 5 2 1 + - * / 
+	Simplest Form: 0
+
+Problem 4:
+	Infix Input:   (9/3)/3
+	PostFix Form:  9 3 / 3 / 
+	Simplest Form: 1
+
+Problem 5:
+	Infix Input:   9/(3/3)
+	PostFix Form:  9 3 3 / / 
+	Simplest Form: 9
+
+Problem 6:
+	Infix Input:   ((2-(3+4))-1+4*3)/7
+	PostFix Form:  2 3 4 + - 1 - 4 3 * + 7 / 
+	Simplest Form: 0
+
+Problem 7:
+	Infix Input:   5-(4+3/(2*1))
+	PostFix Form:  5 4 3 2 1 * / + - 
+	Simplest Form: 0
+
+Problem 8:
+	Infix Input:   5/(4*(3-(2+1)))
+	PostFix Form:  5 4 3 2 1 + - * / 
+	Error: Can't divide by zero!
+
+Problem 9:
+	Infix Input:   (8+8*(4-2))*(3+5-6)
+	PostFix Form:  8 8 4 2 - * + 3 5 + 6 - * 
+	Simplest Form: 48
+*/
 }
