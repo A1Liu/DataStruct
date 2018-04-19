@@ -12,6 +12,7 @@ public class LinkedList<E> {
 	 */
 	public LinkedList(E e) {
 		front = new ListNode<E>(e);
+		back = front;
 	}
 	
 	/**
@@ -23,10 +24,15 @@ public class LinkedList<E> {
 	}
 	
 	public void append(LinkedList<E> l) {
-		this.getBack().setNext(l.getFront());
-		this.back = l.getBack() == null 
-				? this.back 
-				: l.getBack();
+		if (front == null) {
+			front = l.getFront();
+			back = l.getBack();
+		} else {
+			this.getBack().setNext(l.getFront());
+			back = l.getBack() == null 
+					? back 
+					: l.getBack();
+		}
 	}
 	
 	/**
@@ -35,14 +41,6 @@ public class LinkedList<E> {
 	 */
 	public ListNode<E> getFront() {
 		return front;
-	}
-	
-	/**
-	 * setter for the first element of the list
-	 * @param e the new first element
-	 */
-	public void setFront(ListNode<E> e) {
-		front = e;
 	}
 	
 	/**
@@ -66,7 +64,7 @@ public class LinkedList<E> {
 	 * @param e the element that we want to add
 	 */
 	public void add(E e) {
-		if (back == null) {
+		if (front == null) {
 			front = new ListNode<E>(e);
 			back = front;
 		} else {
