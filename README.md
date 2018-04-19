@@ -46,10 +46,10 @@ A program that met the **[Doubly Linked List Program](https://github.com/A1Liu/D
 A program that met the **[Stacks Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Stacks.md)** specifications.  
 
 ## Queue Package
-A program that met the Queue Program specifications.  
+A program that met the **[Queue Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Queues.md)** specifications.  
 
 ## Calculator Package
-A program that met the combined requirements of the Stacks Program and Queue Program specifications.  
+A program that met the combined requirements of the **[Stacks Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Stacks.md)** and [**Queue Program**](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Queues.md) specifications. 
 
 ## Binary Tree Package
 A program that met the **[Binary Tree Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Binary%20Tree.md)** specifications.  
