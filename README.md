@@ -12,7 +12,10 @@ My **Data Structures and Algorithms** assignments. You can run each *.java* file
   * Linked List
   * Reverse Linked List
 * [Doubly Linked List](https://github.com/A1Liu/DataStruct/blob/master/README.md#doubly-linked-list-package)
-* [Stacks](https://github.com/A1Liu/DataStruct/blob/master/README.md#stacks-package)
+* [Calculator](https://github.com/A1Liu/DataStruct/blob/master/README.md#stacks-package)
+  * [Stacks](https://github.com/A1Liu/DataStruct/blob/master/README.md#calculator-package)
+  * [Queues](https://github.com/A1Liu/DataStruct/blob/master/README.md#queue-package)
+* [Binary Tree Package](https://github.com/A1Liu/DataStruct/blob/master/README.md#binary-tree-package)
 
 ## All Projects Package
 This package includes all runners for all the programs, as well as a utility class that contains methods I used very often.  
@@ -42,14 +45,14 @@ Also includes a method that met the **[Reverse Linked List](https://github.com/A
 ## Doubly Linked List Package
 A program that met the **[Doubly Linked List Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Doubly-Linked%20List.md)** specifications.  
 
-## Stacks Package
-A program that met the **[Stacks Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Stacks.md)** specifications.  
-
-## Queue Package
-A program that met the **[Queue Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Queues.md)** specifications.  
-
 ## Calculator Package
 A program that met the combined requirements of the **[Stacks Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Stacks.md)** and [**Queue Program**](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Queues.md) specifications. 
+
+#### Stacks Package
+A program that met the **[Stacks Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Stacks.md)** specifications.  
+
+#### Queue Package
+A program that met the **[Queue Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Queues.md)** specifications.  
 
 ## Binary Tree Package
 A program that met the **[Binary Tree Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Binary%20Tree.md)** specifications.  
