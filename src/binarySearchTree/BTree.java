@@ -70,23 +70,23 @@ public class BTree<E extends Comparable<E>> {
 		System.out.print(node.getData().toString() + ", ");
 		
 		if (node.getLeft() != null) {
-			postOrder(node.getLeft());
+			preOrder(node.getLeft());
 		}
 		
 		if (node.getRight() != null) {
-			postOrder(node.getRight());
+			preOrder(node.getRight());
 		}
 	}
 	
 	public static <T extends Comparable<T>> void inOrder(BTreeNode<T> node) {
 		if (node.getLeft() != null) {
-			postOrder(node.getLeft());
+			inOrder(node.getLeft());
 		}
 		
 		System.out.print(node.getData().toString() + ", ");
 		
 		if (node.getRight() != null) {
-			postOrder(node.getRight());
+			inOrder(node.getRight());
 		}
 	}
 	
