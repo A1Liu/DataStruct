@@ -1,8 +1,5 @@
 package binarySearchTree;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BTree<E extends Comparable<E>> {
 	
 	private BTreeNode<E> root;
@@ -15,14 +12,12 @@ public class BTree<E extends Comparable<E>> {
 		this(new BTreeNode<E>(e));
 	}
 	
-	public BTree(BTreeNode<E> n) {
+	BTree(BTreeNode<E> n) {
 		root = n;
 	}
 	
-	public LinkedList<E> dump() {
-		LinkedList<E> data = preOrder();
+	public void empty() {
 		root = null;
-		return data;
 	}
 	
 	/**
@@ -52,55 +47,60 @@ public class BTree<E extends Comparable<E>> {
 		}
 	}
 	
-	public LinkedList<E> preOrder() {
-		return preOrder(root);
+	public void preOrder() {
+		System.out.print("[");
+		preOrder(root);
+		System.out.println("]");
 	}
 	
-	public LinkedList<E> inOrder() {
-		return inOrder(root);
+	public void inOrder() {
+		System.out.print("[");
+		inOrder(root);
+		System.out.println("]");
 	}
 	
-	public LinkedList<E> postOrder() {
-		return postOrder(root);
+	public void postOrder() {
+		System.out.print("[");
+		postOrder(root);
+		System.out.println("]");
 	}
 	
-	public static <T extends Comparable<T>> LinkedList<T> preOrder(BTreeNode<T> n) {
-		return order(0,n, n.getLeft(), n.getRight());
-	}
-	
-	public static <T extends Comparable<T>> LinkedList<T> inOrder(BTreeNode<T> n) {
-		return order(1,n.getLeft(),n,n.getRight());	
-	}
-	
-	public static <T extends Comparable<T>> LinkedList<T> postOrder(BTreeNode<T> n) {
-		return order(2,n.getLeft(),n.getRight(),n);
-	}
-	
-	@SuppressWarnings("serial")
-	final private static <T extends Comparable<T>> LinkedList<T> order(int localRoot, BTreeNode<T> n1,BTreeNode<T> n2,BTreeNode<T> n3) throws IllegalArgumentException {
+	public static <T extends Comparable<T>> void preOrder(BTreeNode<T> node) {
 		
-		LinkedList<T> data = new LinkedList<T>();
+		System.out.print(node.getData().toString() + ", ");
 		
-		//Making a list of the inputs to make coding easier
-		List<BTreeNode<T>> nodes = new ArrayList<BTreeNode<T>>() {{add(n1);add(n2);add(n3);}};
-
-		//Go through each input, and start adding to the list if necessary
-		for (int x = 0; x < nodes.size(); x++) {
-			if (nodes.get(x) != null) {
-				if (x == localRoot) {
-					data.add(nodes.get(x).getData());
-				} else {
-					if (localRoot == 0){
-						data.append(  order(  localRoot,nodes.get(x),nodes.get(x).getLeft(),nodes.get(x).getRight()  )  );
-					} else if (localRoot == 1) {
-						data.append(  order(  localRoot,nodes.get(x).getLeft(),nodes.get(x),nodes.get(x).getRight()  )  );
-					} else {
-						data.append(  order(  localRoot,nodes.get(x).getLeft(),nodes.get(x).getRight(),nodes.get(x)  )  );
-					}
-				}
-			}
+		if (node.getLeft() != null) {
+			postOrder(node.getLeft());
 		}
-		return data;
+		
+		if (node.getRight() != null) {
+			postOrder(node.getRight());
+		}
+	}
+	
+	public static <T extends Comparable<T>> void inOrder(BTreeNode<T> node) {
+		if (node.getLeft() != null) {
+			postOrder(node.getLeft());
+		}
+		
+		System.out.print(node.getData().toString() + ", ");
+		
+		if (node.getRight() != null) {
+			postOrder(node.getRight());
+		}
+	}
+	
+	public static <T extends Comparable<T>> void postOrder(BTreeNode<T> node) {
+		
+		if (node.getLeft() != null) {
+			postOrder(node.getLeft());
+		}
+		
+		if (node.getRight() != null) {
+			postOrder(node.getRight());
+		}
+		
+		System.out.print(node.getData().toString() + ", ");
 	}
 	
 	public BTreeNode<E> getRoot() {

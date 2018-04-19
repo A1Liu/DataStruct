@@ -5,7 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Runner {
-	public static void main(String[] h) throws IOException {
+	public static void main(String[] args) {
+		BTree<Float> tree = new BTree<Float>();
+		
+		tree.add((float) 1);
+		tree.add((float) 2);
+		tree.add((float) 3);
+		
+		System.out.println(tree.getRoot().getRight().getRight().getData());
+		
+	}
+	
+	public static void main(String args) throws IOException {
 		BTree<Float> tree = new BTree<Float>();
 		
 		BufferedReader consoleLine = new BufferedReader(new InputStreamReader(System.in));
@@ -27,16 +38,16 @@ public class Runner {
 			} else {
 				switch (input.charAt(1)) {
 				case 'o':
-					System.out.println(tree.postOrder().toString());
+					tree.preOrder();
 					break;
 				case 'n':
-					System.out.println(tree.inOrder().toString());
+					tree.inOrder();
 					break;
 				case 'r':
-					System.out.println(tree.preOrder().toString());
+					tree.preOrder();
 					break;
 				case 'm':
-					System.out.println(tree.dump());
+					tree.empty();
 					System.out.println("Tree is now empty.");
 				default:
 					System.out.println("That's not a recognized command!");	
