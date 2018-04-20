@@ -16,14 +16,17 @@ public class BTree<E extends Comparable<E>> {
 		root = n;
 	}
 	
+	/**
+	 * deletes all nodes in the tree
+	 */
 	public void empty() {
 		root = null;
 	}
 	
 	/**
-	 * 
-	 * @param e
-	 * @return
+	 * adds element e to the tree
+	 * @param e the element to add
+	 * @return true if successful
 	 */
 	public boolean add(E e) {
 		if (root == null) {
@@ -35,9 +38,9 @@ public class BTree<E extends Comparable<E>> {
 	}
 	
 	/**
-	 * 
-	 * @param e
-	 * @return
+	 * removes element e from the tree
+	 * @param e the element to remove
+	 * @return true if successful
 	 */
 	public boolean remove(E e) {
 		if (root.getData().equals(e)) {
@@ -47,24 +50,37 @@ public class BTree<E extends Comparable<E>> {
 		}
 	}
 	
+	/**
+	 * output this tree's contents in preorder
+	 */
 	public void preOrder() {
 		System.out.print("[");
 		preOrder(root);
 		System.out.println("]");
 	}
 	
+	/**
+	 * output this tree's contents in order
+	 */
 	public void inOrder() {
 		System.out.print("[");
 		inOrder(root);
 		System.out.println("]");
 	}
 	
+	/**
+	 * output this tree's contents in postorder
+	 */
 	public void postOrder() {
 		System.out.print("[");
 		postOrder(root);
 		System.out.println("]");
 	}
 	
+	/**
+	 * recursive method to output a tree's contents in preorder
+	 * @param node starting node
+	 */
 	public static <T extends Comparable<T>> void preOrder(BTreeNode<T> node) {
 		
 		System.out.print(node.getData().toString() + ", ");
@@ -78,6 +94,10 @@ public class BTree<E extends Comparable<E>> {
 		}
 	}
 	
+	/**
+	 * recursive method to output a tree's contents in order
+	 * @param node starting node
+	 */
 	public static <T extends Comparable<T>> void inOrder(BTreeNode<T> node) {
 		if (node.getLeft() != null) {
 			inOrder(node.getLeft());
@@ -90,6 +110,10 @@ public class BTree<E extends Comparable<E>> {
 		}
 	}
 	
+	/**
+	 * recursive method to output a tree's contents in postorder
+	 * @param node starting node
+	 */
 	public static <T extends Comparable<T>> void postOrder(BTreeNode<T> node) {
 		
 		if (node.getLeft() != null) {
@@ -103,12 +127,19 @@ public class BTree<E extends Comparable<E>> {
 		System.out.print(node.getData().toString() + ", ");
 	}
 	
-	public BTreeNode<E> getRoot() {
+	/**
+	 * getter for the root node. Package visibility because tree nodes shouldn't be accessible without using the BTree
+	 * @return the root node
+	 */
+	BTreeNode<E> getRoot() {
 		return root;
 	}
 	
+	/**
+	 * 
+	 */
 	public String toString() {
-		return null;
+		return "BTree with root node containing "+ root.getData();
 	}
 }
 
@@ -128,6 +159,11 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 		right = r;
 	}
 	
+	/**
+	 * finds a child of this node recursively
+	 * @param e element to find
+	 * @return the child, or null if not found
+	 */
 	public BTreeNode<E> find(E e) {
 		if (this.getData().equals(e)) {
 			return this;
@@ -146,6 +182,11 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 		}
 	}
 	
+	/**
+	 * adds a child of this node recursively
+	 * @param e element to add
+	 * @return true if successful
+	 */
 	public boolean addChild(BTreeNode<E> e) {
 		if (this.getData().equals(e.getData())) {
 			return false;
@@ -170,6 +211,11 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 		return addChild(new BTreeNode<E>(e));
 	}
 	
+	/**
+	 * removes a child of this node recursively
+	 * @param e element of child to remove
+	 * @return true if successful
+	 */
 	public boolean rmChild(E e) {
 		if (e.compareTo(this.getData()) > 0) {
 			if (right == null) {
@@ -194,10 +240,6 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 				return left.rmChild(e);
 			}
 		}
-	}
-	
-	public BTree<E> getChildren() {
-		return new BTree<E>(this);
 	}
 	
 	/**
@@ -247,6 +289,8 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 		return data.compareTo(e);
 	}
 	
-	
+	public String toString() {
+		return "[Tree Node containing " + getData().toString() + "]";
+	}
 	
 }
