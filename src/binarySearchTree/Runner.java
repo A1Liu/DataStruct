@@ -5,17 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Runner {
-	public static void main(String args) {
-		BTree<Float> tree = new BTree<Float>();
-		
-		tree.add((float) 1);
-		tree.add((float) 3);
-		tree.add((float) 2);
-		tree.inOrder();
-		
-		//System.out.println(tree.getRoot().getRight().getRight().getData());
-		
-	}
 	
 	public static void main(String[] args) throws IOException {
 		BTree<Float> tree = new BTree<Float>();
@@ -26,38 +15,41 @@ public class Runner {
 		String input;
 		while (on) {
 			input = consoleLine.readLine();
+			String[] inArray = input.split("\\s+");
 			if (input.equals("off")) {
 				on = false;
-			} else if(input.split("\\s+").length > 1) {
-				if (input.split("\\s+")[0].equals("add") && isNumber(input.split("\\s+")[1])) {
+			} else if(inArray.length > 1) {
+				if (inArray[0].equals("add") && isNumber(inArray[1])) {
 					
-					System.out.println(tree.add(Float.parseFloat(input.split("\\s+")[1]))
-							? "Successfully added " + input.split("\\s+")[1] 
-									: input.split("\\s+")[1] + " is already in the tree.");
+					System.out.println(tree.add(Float.parseFloat(inArray[1]))
+							? "Successfully added " + inArray[1] 
+									: inArray[1] + " is already in the tree.");
 					
-				} else if (input.split(" ")[0].equals("rm") && isNumber(input.split("\\s+")[1])) {
-					System.out.println(tree.remove(Float.parseFloat(input.split("\\s+")[1]))
-							? "Successfully removed " + input.split("\\s+")[1] 
-									: input.split("\\s+")[1] + " is not in the tree.");
-				}
-			} else if (isNumber(input.split("\\s+")[0])) {
-				if (mode) {
-					System.out.println(tree.add(Float.parseFloat(input.split("\\s+")[0]))
-							? "Successfully added " + input.split("\\s+")[0] 
-									: input.split("\\s+")[0] + " is already in the tree.");
+				} else if (input.split(" ")[0].equals("rm") && isNumber(inArray[1])) {
+					System.out.println(tree.remove(Float.parseFloat(inArray[1]))
+							? "Successfully removed " + inArray[1] 
+									: inArray[1] + " is not in the tree.");
 				} else {
-					System.out.println(tree.remove(Float.parseFloat(input.split("\\s+")[0]))
-							? "Successfully removed " + input.split("\\s+")[0] 
-									: input.split("\\s+")[0] + " is not in the tree.");
+					System.out.println("That's not a valid command!");
 				}
-			}else if (input.split("\\s+")[0].equals("add")) {
+			} else if (isNumber(inArray[0])) {
+				if (mode) {
+					System.out.println(tree.add(Float.parseFloat(inArray[0]))
+							? "Successfully added " + inArray[0] 
+									: inArray[0] + " is already in the tree.");
+				} else {
+					System.out.println(tree.remove(Float.parseFloat(inArray[0]))
+							? "Successfully removed " + inArray[0] 
+									: inArray[0] + " is not in the tree.");
+				}
+			}else if (inArray[0].equals("add")) {
 				mode = true;
-			} else if (input.split("\\s+")[0].equals("rm")) {
+			} else if (inArray[0].equals("rm")) {
 				mode = false;
-			} else {
+			} else if (input.length() > 1){
 				switch (input.charAt(1)) {
 				case 'o':
-					tree.preOrder();
+					tree.postOrder();
 					break;
 				case 'n':
 					tree.inOrder();
@@ -68,9 +60,12 @@ public class Runner {
 				case 'm':
 					tree.empty();
 					System.out.println("Tree is now empty.");
+					break;
 				default:
-					System.out.println("That's not a recognized command!");	
+					System.out.println("That's not a recognized command!");
 				}
+			} else {
+				System.out.println("That's not a recognized command!");
 			}
 		}
 	}
