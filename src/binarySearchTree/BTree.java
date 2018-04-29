@@ -33,7 +33,33 @@ public class BTree<E extends Comparable<E>> {
 			root = new BTreeNode<E>(e);
 			return true;
 		} else {
-			return root.addChild(e);
+			return addChild(root, e);
+		}
+	}
+	
+	/**
+	 * adds a descendant of a given node recursively
+	 * Since the set of all of a node's descendants cannot contain the node's data itself, the base case checks to see if the node 
+	 * @param e element to add
+	 * @return true if successful
+	 */
+	private boolean addChild(BTreeNode<E> node, E e) {
+		if (node.getData().equals(e)) {
+			return false;
+		} else if (e.compareTo(node.getData()) > 0) {
+			if (node.getRight() == null) {
+				node.setRight(new BTreeNode<E>(e));
+				return true;
+			} else {
+				return addChild(node.getRight(), e);
+			}
+		} else {
+			if (node.getLeft() == null) {
+				node.setLeft(new BTreeNode<E>(e));
+				return true;
+			} else {
+				return addChild(node.getLeft(),e);
+			}
 		}
 	}
 	
@@ -43,10 +69,51 @@ public class BTree<E extends Comparable<E>> {
 	 * @return true if successful
 	 */
 	public boolean remove(E e) {
-		if (root.getData().equals(e)) {
+		if (root.getData().equals(e) && root.getLeft() == null) {
+			root = root.getRight();
 			return true;
 		} else {
-			return root.rmChild(e);
+			return rmChild(root, e);
+		}
+	}
+	
+	/**
+	 * removes a child of this node recursively.
+	 * @param e element of child to remove
+	 * @return true if successful
+	 */
+	private boolean rmChild(BTreeNode<E> node, E e) {//'this' is a reference to the parent of the node we want to delete
+		if (node.getData().equals(e)) {
+			if (node.getLeft().getRight() == null) {//checks to make sure the in order successor isn't just the left node. If it is, we need to add if before the loop to prevent null pointer exception
+				node.setData(node.getRight().getLeft().getData());
+				node.setLeft(node.getRight().getLeft().getLeft());//successor has no right node so don't need to worry about it.
+			} else {// we can use a while loop to find the parent node of the in order successor
+				BTreeNode<E> temp = node.getRight().getLeft();//start to find in order successor. temp is the parent of the node we'd like to use as successor
+				while (temp.getRight().getRight() != null) {
+					temp = temp.getRight();
+				}
+				node.setData(temp.getRight().getData());
+				temp.setRight(temp.getRight().getLeft());
+			}
+			return true;
+		} else if (e.compareTo(node.getData()) > 0) {//The element should be a rightwards descendant of this node.
+			if (node.getRight() == null) {//There's no descendant where the element should be. Thus, the element isn't in the tree.
+				return false;
+			} else if (node.getRight().getData().equals(e) && node.getRight().getLeft() == null) {//We found the element, and don't need to do in order succession
+				node.setRight(node.getRight().getRight());
+				return true;
+			} else {//The element isn't the right child, so we keep looking.
+				return rmChild(node.getRight(),e);
+			}
+		} else {//The element should be a leftwards descendant of this node.
+			if (node.getLeft() == null) {//There's no descendant where the element should be. Thus, the element isn't in the tree.
+				return false;
+			} else if (node.getLeft().getData().equals(e) && node.getLeft().getLeft() == null){//We found the element.
+				node.setLeft(node.getLeft().getRight());
+				return true;
+			} else {//The element isn't the left child, so we keep looking.
+				return rmChild(node.getLeft(),e);
+			}
 		}
 	}
 	
@@ -143,7 +210,14 @@ public class BTree<E extends Comparable<E>> {
 	}
 }
 
-class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
+/**
+ * This class represents a node in a binary tree structure. Its access is only package wide to prevent other classes besides the BTree class from altering the tree's structural integrity.
+ * For any node in the tree, data equal to or less than its data will be to its left, and data greater than its own will be to the right
+ * @author Alyer
+ *
+ * @param <E> The data type of the tree. The data needs to be comparable to take advantage of the O(log(n)) search time of a binary tree.
+ */
+class BTreeNode<E extends Comparable<E>> implements Comparable<BTreeNode<E>> {
 	
 	private E data;
 	private BTreeNode<E> left;
@@ -183,66 +257,7 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 	}
 	
 	/**
-	 * adds a child of this node recursively
-	 * @param e element to add
-	 * @return true if successful
-	 */
-	public boolean addChild(BTreeNode<E> e) {
-		if (this.getData().equals(e.getData())) {
-			return false;
-		} else if (e.compareTo(this.getData()) > 0) {
-			if (right == null) {
-				this.setRight(e);
-				return true;
-			} else {
-				return this.getRight().addChild(e);
-			}
-		} else {
-			if (left == null) {
-				this.setLeft(e);
-				return true;
-			} else {
-				return this.getLeft().addChild(e);
-			}
-		}
-	}
-
-	public boolean addChild(E e) {
-		return addChild(new BTreeNode<E>(e));
-	}
-	
-	/**
-	 * removes a child of this node recursively
-	 * @param e element of child to remove
-	 * @return true if successful
-	 */
-	public boolean rmChild(E e) {
-		if (e.compareTo(this.getData()) > 0) {
-			if (right == null) {
-				return false;
-			} else if (right.getData().equals(e)){
-				BTreeNode<E> branch = right.getRight();
-				right = right.getLeft();
-				right.getLeft().addChild(branch);
-				return true;
-			} else {
-				return right.rmChild(e);
-			}
-		} else {
-			if (left == null) {
-				return false;
-			} else if (left.getData().equals(e)){
-				BTreeNode<E> branch = left.getLeft();
-				left = left.getRight();
-				left.getRight().addChild(branch);
-				return true;
-			} else {
-				return left.rmChild(e);
-			}
-		}
-	}
-	
-	/**
+	 * getter for data
 	 * @return the data
 	 */
 	public E getData() {
@@ -250,6 +265,7 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 	}
 
 	/**
+	 * setter for data
 	 * @param data the data to set
 	 */
 	public void setData(E data) {
@@ -257,6 +273,7 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 	}
 
 	/**
+	 * getter for left child
 	 * @return the left
 	 */
 	public BTreeNode<E> getLeft() {
@@ -264,6 +281,7 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 	}
 
 	/**
+	 * setter for left child
 	 * @param left the left to set
 	 */
 	public void setLeft(BTreeNode<E> left) {
@@ -271,6 +289,7 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 	}
 
 	/**
+	 * getter for right child
 	 * @return the right
 	 */
 	public BTreeNode<E> getRight() {
@@ -278,17 +297,22 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<E> {
 	}
 
 	/**
+	 * setter for right child
 	 * @param right the right to set
 	 */
 	public void setRight(BTreeNode<E> right) {
 		this.right = right;
 	}
 
+	
 	@Override
-	public int compareTo(E e) {
-		return data.compareTo(e);
+	public int compareTo(BTreeNode<E> e) {
+		return data.compareTo(e.getData());
 	}
 	
+	/**
+	 * ToString for a single node
+	 */
 	public String toString() {
 		return "[Tree Node containing " + getData().toString() + "]";
 	}
