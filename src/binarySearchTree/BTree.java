@@ -124,7 +124,7 @@ public class BTree<E extends Comparable<E>> {
 		if (root == null)
 			System.out.println("Tree is Empty");
 		else {
-			System.out.print("[");
+			System.out.print("PreOrder: [");
 			preOrder(root);
 			System.out.println("]");
 		}
@@ -137,7 +137,7 @@ public class BTree<E extends Comparable<E>> {
 		if (root == null)
 			System.out.println("Tree is Empty");
 		else {
-			System.out.print("[");
+			System.out.print("InOrder: [");
 			inOrder(root);
 			System.out.println("]");
 		}
@@ -148,7 +148,7 @@ public class BTree<E extends Comparable<E>> {
 	 */
 	public void postOrder() {
 		if (root == null)
-			System.out.println("Tree is Empty");
+			System.out.println("PostOrder: Tree is Empty");
 		else {
 			System.out.print("[");
 			postOrder(root);

@@ -23,6 +23,8 @@ public class Runner {
 		while (on) {
 			/*/input = consoleLine.readLine();/**/
 			/**/input = inFile.readLine();/**/
+			System.out.println(input);
+			System.out.print("\t");
 			String[] inArray = input.split("\\s+");
 			if (input.equals("QUIT")) {
 				on = false;
@@ -71,7 +73,7 @@ public class Runner {
 			} else {
 				System.out.println("That's not a recognized command!");
 			}
-			
+			System.out.println();
 		}
 		/**/inFile.close();/**/
 	}
