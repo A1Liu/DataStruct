@@ -1,6 +1,7 @@
 package binarySearchTree;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -9,23 +10,30 @@ public class Runner {
 	public static void main(String[] args) throws IOException {
 		BTree<Float> tree = new BTree<Float>();
 		
-		BufferedReader consoleLine = new BufferedReader(new InputStreamReader(System.in));
 		boolean on = true;
 		boolean mode = true;
 		String input;
+		
+		/*/BufferedReader consoleLine = new BufferedReader(new InputStreamReader(System.in));/**/
+		
+		FileReader readFile = new FileReader("in/BST.txt"); //or input.readLine( ) if from prompt
+		BufferedReader inFile = new BufferedReader(readFile);
+		
+		
 		while (on) {
-			input = consoleLine.readLine();
+			/*/input = consoleLine.readLine();/**/
+			/**/input = inFile.readLine();/**/
 			String[] inArray = input.split("\\s+");
-			if (input.equals("off")) {
+			if (input.equals("QUIT")) {
 				on = false;
 			} else if(inArray.length > 1) {
-				if (inArray[0].equals("add") && isNumber(inArray[1])) {
+				if (inArray[0].equals("A") && isNumber(inArray[1])) {
 					
 					System.out.println(tree.add(Float.parseFloat(inArray[1]))
 							? "Successfully added " + inArray[1] 
 									: inArray[1] + " is already in the tree.");
 					
-				} else if (input.split(" ")[0].equals("rm") && isNumber(inArray[1])) {
+				} else if (input.split(" ")[0].equals("D") && isNumber(inArray[1])) {
 					System.out.println(tree.remove(Float.parseFloat(inArray[1]))
 							? "Successfully removed " + inArray[1] 
 									: inArray[1] + " is not in the tree.");
@@ -48,18 +56,14 @@ public class Runner {
 				mode = false;
 			} else if (input.length() > 1){
 				switch (input.charAt(1)) {
-				case 'o':
+				case 'O':
 					tree.postOrder();
 					break;
-				case 'n':
+				case 'N':
 					tree.inOrder();
 					break;
-				case 'r':
+				case 'R':
 					tree.preOrder();
-					break;
-				case 'm':
-					tree.empty();
-					System.out.println("Tree is now empty.");
 					break;
 				default:
 					System.out.println("That's not a recognized command!");
@@ -67,7 +71,9 @@ public class Runner {
 			} else {
 				System.out.println("That's not a recognized command!");
 			}
+			
 		}
+		/**/inFile.close();/**/
 	}
 	
 	/**

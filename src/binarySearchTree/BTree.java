@@ -85,10 +85,10 @@ public class BTree<E extends Comparable<E>> {
 	private boolean rmChild(BTreeNode<E> node, E e) {//'this' is a reference to the parent of the node we want to delete
 		if (node.getData().equals(e)) {
 			if (node.getLeft().getRight() == null) {//checks to make sure the in order successor isn't just the left node. If it is, we need to add if before the loop to prevent null pointer exception
-				node.setData(node.getRight().getLeft().getData());
-				node.setLeft(node.getRight().getLeft().getLeft());//successor has no right node so don't need to worry about it.
+				node.setData(node.getLeft().getData());
+				node.setLeft(node.getLeft().getLeft());//successor has no right node so don't need to worry about it.
 			} else {// we can use a while loop to find the parent node of the in order successor
-				BTreeNode<E> temp = node.getRight().getLeft();//start to find in order successor. temp is the parent of the node we'd like to use as successor
+				BTreeNode<E> temp = node.getLeft();//start to find in order successor. temp is the parent of the node we'd like to use as successor
 				while (temp.getRight().getRight() != null) {
 					temp = temp.getRight();
 				}
@@ -121,27 +121,39 @@ public class BTree<E extends Comparable<E>> {
 	 * output this tree's contents in preorder
 	 */
 	public void preOrder() {
-		System.out.print("[");
-		preOrder(root);
-		System.out.println("]");
+		if (root == null)
+			System.out.println("Tree is Empty");
+		else {
+			System.out.print("[");
+			preOrder(root);
+			System.out.println("]");
+		}
 	}
 	
 	/**
 	 * output this tree's contents in order
 	 */
 	public void inOrder() {
-		System.out.print("[");
-		inOrder(root);
-		System.out.println("]");
+		if (root == null)
+			System.out.println("Tree is Empty");
+		else {
+			System.out.print("[");
+			inOrder(root);
+			System.out.println("]");
+		}
 	}
 	
 	/**
 	 * output this tree's contents in postorder
 	 */
 	public void postOrder() {
-		System.out.print("[");
-		postOrder(root);
-		System.out.println("]");
+		if (root == null)
+			System.out.println("Tree is Empty");
+		else {
+			System.out.print("[");
+			postOrder(root);
+			System.out.println("]");
+		}
 	}
 	
 	/**
@@ -149,14 +161,9 @@ public class BTree<E extends Comparable<E>> {
 	 * @param node starting node
 	 */
 	public static <T extends Comparable<T>> void preOrder(BTreeNode<T> node) {
-		
-		System.out.print(node.getData().toString() + ", ");
-		
-		if (node.getLeft() != null) {
+		if (node != null) {
+			System.out.print(node.getData().toString() + ", ");
 			preOrder(node.getLeft());
-		}
-		
-		if (node.getRight() != null) {
 			preOrder(node.getRight());
 		}
 	}
@@ -166,13 +173,9 @@ public class BTree<E extends Comparable<E>> {
 	 * @param node starting node
 	 */
 	public static <T extends Comparable<T>> void inOrder(BTreeNode<T> node) {
-		if (node.getLeft() != null) {
+		if (node != null) {
 			inOrder(node.getLeft());
-		}
-		
-		System.out.print(node.getData().toString() + ", ");
-		
-		if (node.getRight() != null) {
+			System.out.print(node.getData().toString() + ", ");
 			inOrder(node.getRight());
 		}
 	}
@@ -182,16 +185,11 @@ public class BTree<E extends Comparable<E>> {
 	 * @param node starting node
 	 */
 	public static <T extends Comparable<T>> void postOrder(BTreeNode<T> node) {
-		
-		if (node.getLeft() != null) {
+		if (node != null) {
 			postOrder(node.getLeft());
-		}
-		
-		if (node.getRight() != null) {
 			postOrder(node.getRight());
+			System.out.print(node.getData().toString() + ", ");
 		}
-		
-		System.out.print(node.getData().toString() + ", ");
 	}
 	
 	/**
