@@ -1,0 +1,122 @@
+PREORDER
+	Tree is Empty
+
+A 13
+	Successfully added 13
+
+A 10
+	Successfully added 10
+
+A 20
+	Successfully added 20
+
+A 12
+	Successfully added 12
+
+A 15
+	Successfully added 15
+
+A 5
+	Successfully added 5
+
+PREORDER
+	PreOrder: [13.0, 10.0, 5.0, 12.0, 20.0, 15.0, ]
+
+INORDER
+	InOrder: [5.0, 10.0, 12.0, 13.0, 15.0, 20.0, ]
+
+POSTORDER
+	[5.0, 12.0, 10.0, 15.0, 20.0, 13.0, ]
+
+D 5
+	Successfully removed 5
+
+A 30
+	Successfully added 30
+
+A 40
+	Successfully added 40
+
+A 11
+	Successfully added 11
+
+D 18
+	18 is not in the tree.
+
+A 35
+	Successfully added 35
+
+A 50
+	Successfully added 50
+
+D 0
+	0 is not in the tree.
+
+D 20
+	Successfully removed 20
+
+INORDER
+	InOrder: [10.0, 11.0, 12.0, 13.0, 15.0, 30.0, 35.0, 40.0, 50.0, ]
+
+D 50
+	Successfully removed 50
+
+A 2
+	Successfully added 2
+
+D 13
+	Successfully removed 13
+
+D 100
+	100 is not in the tree.
+
+D 10
+	Successfully removed 10
+
+D 2
+	Successfully removed 2
+
+INORDER
+	InOrder: [11.0, 12.0, 15.0, 30.0, 35.0, 40.0, ]
+
+D 15
+	Successfully removed 15
+
+D 12
+	Successfully removed 12
+
+D 30
+	Successfully removed 30
+
+D 35
+	Successfully removed 35
+
+D 40
+	Successfully removed 40
+
+POSTORDER
+	[11.0, ]
+
+A 10
+	Successfully added 10
+
+A 15
+	Successfully added 15
+
+A 20
+	Successfully added 20
+
+A 5
+	Successfully added 5
+
+PREORDER
+	PreOrder: [11.0, 10.0, 5.0, 15.0, 20.0, ]
+
+INORDER
+	InOrder: [5.0, 10.0, 11.0, 15.0, 20.0, ]
+
+POSTORDER
+	[5.0, 10.0, 20.0, 15.0, 11.0, ]
+
+QUIT
+	
