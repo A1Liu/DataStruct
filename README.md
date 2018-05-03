@@ -16,6 +16,7 @@ My **Data Structures and Algorithms** assignments. You can run each *.java* file
   * [Stacks](https://github.com/A1Liu/DataStruct/blob/master/README.md#calculator-package)
   * [Queues](https://github.com/A1Liu/DataStruct/blob/master/README.md#queue-package)
 * [Binary Tree Package](https://github.com/A1Liu/DataStruct/blob/master/README.md#binary-tree-package)
+* [Priority Queue Package](https://github.com/A1Liu/DataStruct/blob/master/README.md#priority-queue-package)
 
 ## All Projects Package
 This package includes all runners for all the programs, as well as a utility class that contains methods I used very often.  
@@ -56,3 +57,6 @@ A program that met the **[Queue Program](https://github.com/A1Liu/DataStruct/blo
 
 ## Binary Tree Package
 A program that met the **[Binary Tree Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Binary%20Tree.md)** specifications.  
+
+## Priority Queue Package
+A program that met the **[Priority Queue Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Priority%20Queue.md)** specifications.
