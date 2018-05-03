@@ -236,23 +236,23 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<BTreeNode<E>> {
 	 * @param e element to find
 	 * @return the child, or null if not found
 	 */
-	public BTreeNode<E> find(E e) {
-		if (this.getData().equals(e)) {
-			return this;
-		} else if (e.compareTo(this.getData()) > 0) {
-			if (right == null) {
-				return null;
-			} else {
-				return this.getRight().find(e);
-			}
-		} else {
-			if (left == null) {
-				return null;
-			} else {
-				return this.getLeft().find(e);
-			}
-		}
-	}
+//	BTreeNode<E> find(E e) {
+//		if (this.getData().equals(e)) {
+//			return this;
+//		} else if (e.compareTo(this.getData()) > 0) {
+//			if (right == null) {
+//				return null;
+//			} else {
+//				return this.getRight().find(e);
+//			}
+//		} else {
+//			if (left == null) {
+//				return null;
+//			} else {
+//				return this.getLeft().find(e);
+//			}
+//		}
+//	}
 	
 	/**
 	 * getter for data
@@ -266,7 +266,7 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<BTreeNode<E>> {
 	 * setter for data
 	 * @param data the data to set
 	 */
-	public void setData(E data) {
+	void setData(E data) {
 		this.data = data;
 	}
 
@@ -282,7 +282,7 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<BTreeNode<E>> {
 	 * setter for left child
 	 * @param left the left to set
 	 */
-	public void setLeft(BTreeNode<E> left) {
+	void setLeft(BTreeNode<E> left) {
 		this.left = left;
 	}
 
@@ -298,7 +298,7 @@ class BTreeNode<E extends Comparable<E>> implements Comparable<BTreeNode<E>> {
 	 * setter for right child
 	 * @param right the right to set
 	 */
-	public void setRight(BTreeNode<E> right) {
+	void setRight(BTreeNode<E> right) {
 		this.right = right;
 	}
 
