@@ -3,18 +3,26 @@ package priorityQ;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class PriorityQueue<E> implements Queue<E> {
+public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 
 	ArrayList<E> elements;//element in index i has children in indices 2*i and 2*i + 1
+	//lower indexes have entered first if values are equal
 	
 	public PriorityQueue() {
 		elements = new ArrayList<E>();
 	}
 	
 	@Override
-	public void enqueue(Object t) {
-		// TODO Auto-generated method stub
+	public void enqueue(E e) {
 		
+		if (isEmpty()) {
+			elements.add(e);
+			return;
+		}
+		int index = 0;
+		while (index < elements.size() && e.compareTo(elements.get(index)) < 0) {
+			
+		}
 	}
 
 	@Override
