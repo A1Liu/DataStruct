@@ -23,6 +23,7 @@ public class Runner {
 			public void execute(Object... elist) {
 				Integer priority = (Integer) elist[0];
 				this.getObject().enqueue(new Patient(FIRST,LAST+getCounter(),priority));
+				System.out.println("Default patient with PLevel: " + priority + " added.");
 			}});
 		
 		commands.addCommand(2, new Com(pQ) {@Override
@@ -36,6 +37,15 @@ public class Runner {
 			}});
 		
 		commands.addCommand(4, e -> Runner.quit());
+		
+		commands.addCommand(5, new Com(pQ,"String","String","Integer") {@Override
+			public void execute(Object... elist) {
+			String first = (String) elist[0];
+			String last = (String) elist[1];
+			Integer priority = (Integer) elist[2];
+			getObject().enqueue(new Patient(first, last, priority));
+			System.out.println("Patient " + last + ", " + first + " added, with PLevel: " + priority + ".");
+		}});
 		
 		BufferedReader consoleLine = new BufferedReader(new InputStreamReader(System.in));
 		String in;

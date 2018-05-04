@@ -1,4 +1,5 @@
 add:1
+	patient:5
 getnext:2
 front:3
 quit:4
