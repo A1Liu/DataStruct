@@ -1,0 +1,4 @@
+add:1
+getnext:2
+front:3
+quit:4

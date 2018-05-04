@@ -1,6 +1,6 @@
 package priorityQ;
 
-public class Patient {
+public class Patient implements Comparable<Patient> {
 	private String first;
 	private String last;
 	private int priority;
@@ -51,6 +51,15 @@ public class Patient {
 	 */
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+
+	@Override
+	public int compareTo(Patient o) {
+		return this.getPriority() - o.getPriority();
+	}
+	
+	public String toString() {
+		return first + " " + last +", PLevel: " + priority;
 	}
 	
 }
