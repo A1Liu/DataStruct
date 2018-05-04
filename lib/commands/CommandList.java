@@ -2,21 +2,22 @@ package commands;
 
 import java.util.Arrays;
 import java.util.Hashtable;
+import static commands.Util.*;
 
-public class CommandList {
+class CommandList {
 
 	private ComTree comTree;//This is the data structure that holds the command hierarchy.
 	private Hashtable<Integer,Command> coms;
 	private int count;
 	
-	public CommandList(String[] graph) {
+	CommandList(String[] graph) {
 		this.addGraph(graph);
 	}
 	
-	public CommandList() {
+	CommandList() {
 		comTree = new ComTree();
 		coms = new Hashtable<Integer,Command>();
-		coms.put(-1, new EmptyCommand());
+		coms.put(-1, new NullC());
 		count = 0;
 	}
 	
@@ -26,8 +27,8 @@ public class CommandList {
 	 * Format:
 	 * ------------
 	 * 
-	Command1
-		SubCommand1
+	Command:1
+		SubCommand1:2,3
 			SubSubCommand1
 				SubSubSubCommand1
 			SubSubCommand2
@@ -45,17 +46,18 @@ public class CommandList {
 	 * Begins the recursion to create the command tree based off of a formatted String array
 	 * @param commands the array of strings that represents the command tree
 	 */
-	public void addGraph(String[] commands) {
+	void addGraph(String[] commands) {
 		for (int x = 0; x< commands.length; x++) {
 			int y = commands[x].lastIndexOf('\t') + 1;
-			commands[x] = y + commands[x].trim().toLowerCase() + " ";
+			commands[x] = y + commands[x].trim() + " ";
 		}
 		
 		addGraph(comTree.getRoot(),commands,0,commands.length-1);
 		if (!comTree.getRoot().containsChild("help")) {
 			while (coms.containsKey(++count)) {}
 			comTree.getRoot().addChild("help", count);
-			coms.put(count, elist -> System.out.println("--Empty Help Menu--"));
+			comTree.getRoot().getChild("help").setHelp("This command gives helpful information. You can add command paths as arguments and it will give you help for a specific command.");
+			coms.put(count, new HelpC(comTree));
 		}
 	}
 	
@@ -71,22 +73,9 @@ public class CommandList {
 		
 		for (int x = startIndex; x <= endIndex; x++) {//loop through all of the lines in the array. X represents the position the reader is at in the array.
 			if(Integer.parseInt(commands[x].substring(0, 1)) == indent) {//If the line we're reading is at the level we're at, then let's add it to the tree
-				//Does some trapping to change empty inputs and permutations of the word "null" to the null reference
-				String command = (commands[x].substring(1).equals("null") || commands[x].substring(1).trim().equals("")) ? null : commands[x].substring(1).trim();
-				if (command != null && command.indexOf(":") != -1) {//If the node name is in the format of nodeName:x where x is an integer, then we use x as the identifier for a command that should go there
-					Integer id = null;
-					try {
-						id = Integer.parseInt((command.substring(command.indexOf(":") + 1)));
-						coms.put(id, new EmptyCommand());//Adds a null entry to the hashtable, which acts as a placeholder for the executable command that should go there.
-					} catch (NumberFormatException e) {
-						
-					} finally {
-						command = command.substring(0, command.indexOf(":"));
-						node.addChild(command,id);
-					}
-				} else {
-					node.addChild(command);//Add it to the tree!
-				}
+				String[] commandParts = formatCommand(commands[x]);
+				String command = commandParts[0];
+				addCommand(node,commandParts);
 				
 				if (x < endIndex) {//If we're not at the end of this call's scope, then this could be a parent node
 					if (Integer.parseInt(commands[x+1].substring(0, 1)) > indent) {//If this node is a parent node, call recursion
@@ -106,14 +95,52 @@ public class CommandList {
 		}
 	}
 	
+	private String[] formatCommand(String raw) {
+		String command = (raw.substring(1).equals("null") || raw.substring(1).trim().equals("")) ? null : raw.substring(1).trim();
+		if (command == null) 
+			return new String[] {null};
+		String[] out = command.split("\\s*-\\s*",2);
+		if (out.length > 1) {
+			out = Util.append(out[0].split(":",2), out[1]);
+		} else {
+			out = out[0].split(":",2);
+		}
+		out[0] = out[0].toLowerCase().replaceAll("\\s","");
+		return out;
+	}
+	
+	private void addCommand(ComTreeNode parent, String[] command) {
+		
+		parent.addChild(command[0]);
+		
+		if (command.length >= 3) {// in form name:ints - helptext
+			if (isNumber(command[1])) {
+				parent.getChild(command[0]).setID(Integer.parseInt(command[1]));
+				coms.put(Integer.parseInt(command[1]), new NullC());
+			}
+			parent.getChild(command[0]).setHelp(command[2]);
+		} else if (command.length == 2){
+			parent.addChild(command[0]);
+			if(isNumber(command[1])) {
+				parent.getChild(command[0]).setID(Integer.parseInt(command[1]));
+				coms.put(Integer.parseInt(command[1]), new NullC());
+			} else {
+				parent.getChild(command[0]).setHelp(command[1]);
+			}
+		}
+	}
+	
 	/**
 	 * adds an executable command to the command tree
 	 * @param path 
 	 * @param c
 	 */
-	public void addCommand(String[] path, Command command) {
+	void addCommand(String[] path, Command command) {
+		if (command == null)
+			throw new CommandConfigurationException("The command object cannot be null.");
 		while (!coms.containsKey(++count)) {}
 		comTree.addPath(path,count);
+		coms.put(count, command);
 	}
 	
 	/**
@@ -121,44 +148,24 @@ public class CommandList {
 	 * @param label
 	 * @param command
 	 */
-	public void addCommand(Integer label, Command command) {
+	void addCommand(Integer label, Command command) {
+		if (command == null)
+			throw new CommandConfigurationException("The command object cannot be null.");
 		if (label < 0)
 			throw new IllegalArgumentException("Cannot have a negative ID.");
 		coms.replace(label, command);
 	}
-
-	/**
-	 * takes an input and executes a command based off of it. Should traverse as far as it can down the command tree and then take the rest of the input as parameters
-	 * @param in the input string to take
-	 */
-	public void input(String in) {
-		String[] stringList = in.split("\\s+");
-		int counter = 0;
-		ComTreeNode current = comTree.getRoot();
-		while(counter < stringList.length && current.containsChild(stringList[counter])) {
-			current = current.getChild(stringList[counter]);
-			counter++;
-		}
-		if (current == comTree.getRoot()) {
-			throw new CommandException("That's not a valid command!");
-		} else if (current.getID() == null && current.getChildren().size() != 0) {
-			String comPath = "";
-			for (int x = 0; x < counter; x++) {
-				comPath += stringList[x] + " ";
-			}
-			comPath = comPath.trim();
-			if (counter < stringList.length) {
-				throw new CommandException("'" + stringList[counter] + "' is not a recognized subcommand of " + comPath);	
-			} else {
-				throw new CommandException("'" + comPath + "' is not a complete command. Please pass more parameters.");
-			}
-		} else {
-			coms.get(current.getID()).execute(Arrays.copyOfRange(stringList, counter, stringList.length));
-		}
-	}
 	
 	public String toString() {
 		return comTree.toString().replaceFirst("\\n", "");
+	}
+	
+	Command get(Integer i) {
+		return coms.get(i);
+	}
+	
+	ComTree getTree() {
+		return comTree;
 	}
 
 }

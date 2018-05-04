@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import commands.CommandList;
+import commands.Commands;
 
 import static priorityQ.Runner.readLines;
 
@@ -14,7 +14,7 @@ public class Run extends allProjects.Runner {
 	private static String LAST = "Bubkiss";
 	
 	private PriorityQueue<Patient> pQ;
-	private CommandList commands;
+	private Commands commands;
 	private BufferedReader consoleLine;
 	
 	public static void main(String...args) {
@@ -26,28 +26,28 @@ public class Run extends allProjects.Runner {
 		
 		pQ = new PriorityQueue<Patient>();
 			
-		commands = new CommandList();
+		commands = new Commands();
 		commands.addGraph(readLines("in/priorityQCommands.txt"));
-		commands.addCommand(1, new Com(pQ,"Integer") {@Override
+		commands.setCommand(1, new PatientCommand(pQ,"Integer") {@Override
 			public void execute(Object... elist) {
 				Integer priority = (Integer) elist[0];
 				this.getObject().enqueue(new Patient(FIRST,LAST+getCounter(),priority));
 				System.out.println("Default patient with PLevel: " + priority + " added.");
 			}});
 		
-		commands.addCommand(2, new Com(pQ) {@Override
+		commands.setCommand(2, new PatientCommand(pQ) {@Override
 			public void execute(Object... elist) {
 				System.out.println(this.getObject().dequeue().toString());
 			}});
 		
-		commands.addCommand(3, new Com(pQ) {@Override
+		commands.setCommand(3, new PatientCommand(pQ) {@Override
 			public void execute(Object... elist) {
 				System.out.println(this.getObject().front().toString());
 			}});
 		
-		commands.addCommand(4, e -> this.quit());
+		commands.setCommand(4, e -> this.quit());
 		
-		commands.addCommand(5, new Com(pQ,"String","String","Integer") {@Override
+		commands.setCommand(5, new PatientCommand(pQ,"String","String","Integer") {@Override
 			public void execute(Object... elist) {
 			String first = (String) elist[0];
 			String last = (String) elist[1];

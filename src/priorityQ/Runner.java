@@ -17,28 +17,28 @@ public class Runner {
 	public static void main(String...strings ) throws IOException {
 		PriorityQueue<Patient> pQ = new PriorityQueue<Patient>();
 		
-		CommandList commands = new CommandList();
+		Commands commands = new Commands();
 		commands.addGraph(readLines("in/priorityQCommands.txt"));
-		commands.addCommand(1, new Com(pQ,"Integer") {@Override
+		commands.setCommand(1, new PatientCommand(pQ,"Integer") {@Override
 			public void execute(Object... elist) {
 				Integer priority = (Integer) elist[0];
 				this.getObject().enqueue(new Patient(FIRST,LAST+getCounter(),priority));
 				System.out.println("Default patient with PLevel: " + priority + " added.");
 			}});
 		
-		commands.addCommand(2, new Com(pQ) {@Override
+		commands.setCommand(2, new PatientCommand(pQ) {@Override
 			public void execute(Object... elist) {
 				System.out.println(this.getObject().dequeue().toString());
 			}});
 		
-		commands.addCommand(3, new Com(pQ) {@Override
+		commands.setCommand(3, new PatientCommand(pQ) {@Override
 			public void execute(Object... elist) {
 				System.out.println(this.getObject().front().toString());
 			}});
 		
-		commands.addCommand(4, e -> Runner.quit());
+		commands.setCommand(4, e -> Runner.quit());
 		
-		commands.addCommand(5, new Com(pQ,"String","String","Integer") {@Override
+		commands.setCommand(5, new PatientCommand(pQ,"String","String","Integer") {@Override
 			public void execute(Object... elist) {
 			String first = (String) elist[0];
 			String last = (String) elist[1];
@@ -75,19 +75,5 @@ public class Runner {
 		}
 		reader.close();
 		return output.toArray(new String[output.size()]);
-	}
-}
-
-abstract class Com extends OCommand<PriorityQueue<Patient>> {
-	
-	private int counter;
-	
-	Com(PriorityQueue<Patient> priorityQueue, String... strings) {
-		super(priorityQueue, strings);
-		counter = 0;
-	}
-	
-	public int getCounter() {
-		return ++counter;
 	}
 }

@@ -39,6 +39,11 @@ class ComTreeNode {
 			this.children.add(new ComTreeNode(e,id));
 	}
 	
+	void addChild(String e, Integer id, String helpText) {
+		if (!this.children.contains(new ComTreeNode(e,id)))
+			this.children.add(new ComTreeNode(e,id,helpText));
+	}
+	
 	void rmChild(String e) {
 		this.children.remove(new ComTreeNode(e));
 	}

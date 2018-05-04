@@ -1,5 +1,10 @@
 package commands;
 
+/**
+ * This is an exception that occurs when the command tree hasn't been setup properly.
+ * @author aliu
+ *
+ */
 public class CommandConfigurationException extends RuntimeException {
 
 	/**

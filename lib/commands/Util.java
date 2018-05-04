@@ -4,13 +4,28 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Util {
+class Util {
 
-	public Util() {
+	private Util() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public static <T> T[] append(T[] array, T newElement) {
+		array = Arrays.copyOf(array, array.length+1);
+		array[array.length-1] = newElement;
+		return array;
+	}
 
+	public static boolean isNumber(String in) {
+		try{
+			Integer.parseInt(in);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
 	
 	public static String[] readLines(String document) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(document));
