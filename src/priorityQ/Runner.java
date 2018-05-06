@@ -6,19 +6,29 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import commands.*;
+import commands.Commands;
+import runner.LoopRunner;
 
-public class Runner {
+public class Runner extends LoopRunner {
 	
-	public final static String FIRST = "Bill";
-	public final static String LAST = "Bubkiss";
-	private static boolean run = true;
+	private static String FIRST = "John";
+	private static String LAST = "Doe";
 	
-	public static void main(String...strings ) throws IOException {
-		PriorityQueue<Patient> pQ = new PriorityQueue<Patient>();
-		
-		Commands commands = new Commands();
+	private PriorityQueue<Patient> pQ;
+	private Commands commands;
+	private BufferedReader consoleLine;
+	
+	public static void main(String...args) {
+		launch(args);
+	}
+
+	@Override
+	public void atStart(Object... args) throws Exception {
+		//Make the queue and command tree,
+		pQ = new PriorityQueue<Patient>();
+		commands = new Commands();
 		commands.addGraph(readLines("in/priorityQCommands.txt"));
+
 		commands.setCommand(1, new PatientCommand(pQ,"Integer") {@Override
 			public void execute(Object... elist) {
 				Integer priority = (Integer) elist[0];
@@ -36,7 +46,7 @@ public class Runner {
 				System.out.println(this.getObject().front().toString());
 			}});
 		
-		commands.setCommand(4, e -> Runner.quit());
+		commands.setCommand(4, e -> this.quit());
 		
 		commands.setCommand(5, new PatientCommand(pQ,"String","String","Integer") {@Override
 			public void execute(Object... elist) {
@@ -44,26 +54,22 @@ public class Runner {
 			String last = (String) elist[1];
 			Integer priority = (Integer) elist[2];
 			getObject().enqueue(new Patient(first, last, priority));
-			System.out.println("Patient " + last + ", " + first + " added, with PLevel: " + priority + ".");
+			System.out.println("Patient '" + last + ", " + first + "' added, with PLevel: " + priority + ".");
 		}});
 		
-		BufferedReader consoleLine = new BufferedReader(new InputStreamReader(System.in));
-		String in;
-		
-		while (run) {
-			in = consoleLine.readLine();
-			try {
-				commands.input(in);
-			} catch (CommandException c) {
-				System.out.println(c.getMessage());
-			}
-		}
+		consoleLine = new BufferedReader(new InputStreamReader(System.in));
 	}
-	
-	public static void quit() {
-		run = false;
+
+	@Override
+	public void loop(Object... args) throws Exception {
+		commands.input(consoleLine.readLine());
 	}
-	
+
+	@Override
+	public void atEnd(Object... args) throws Exception {
+		System.out.println("Thanks for using the priorityQueue program!");
+	}
+
 	public static String[] readLines(String document) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(document));
 		ArrayList<String> output = new ArrayList<String>();
@@ -76,4 +82,5 @@ public class Runner {
 		reader.close();
 		return output.toArray(new String[output.size()]);
 	}
+
 }

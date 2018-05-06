@@ -1,8 +1,8 @@
 package priorityQ;
 
-import commands.OCommand;
+import commands.ObjParamC;;
 
-abstract class PatientCommand extends OCommand<PriorityQueue<Patient>> {
+abstract class PatientCommand extends ObjParamC<PriorityQueue<Patient>> {
 	
 	private int counter;
 	

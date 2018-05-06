@@ -3,7 +3,7 @@ package commands;
 import java.util.ArrayList;
 
 /**
- * Tree node of a generalized tree
+ * Tree node of a command tree
  * @author Alyer
  *
  * @param <E> dataType of the tree node
@@ -30,33 +30,63 @@ class ComTreeNode {
 		children = new ArrayList<ComTreeNode>(0);
 	}
 
+	/**
+	 * adds a child node of name e
+	 * @param e name of node
+	 */
 	void addChild(String e) {
 		this.addChild(e, null);
 	}
 	
+	/**
+	 * adds a child with name e and integer identifier id
+	 * @param e name of node
+	 * @param id int id of node
+	 */
 	void addChild(String e, Integer id) {
-		if (!this.children.contains(new ComTreeNode(e,id)))
-			this.children.add(new ComTreeNode(e,id));
+		this.addChild(e, id, null);
 	}
 	
+	/**
+	 * adds a child with name e and integer identifier id
+	 * @param e name of node
+	 * @param id int id of node
+	 */
 	void addChild(String e, Integer id, String helpText) {
 		if (!this.children.contains(new ComTreeNode(e,id)))
 			this.children.add(new ComTreeNode(e,id,helpText));
 	}
 	
+	/**
+	 * removes child with name e
+	 * @param e
+	 */
 	void rmChild(String e) {
 		this.children.remove(new ComTreeNode(e));
 	}
 	
+	/**
+	 * checks if this node has a child with name e
+	 * @param e
+	 * @return
+	 */
 	boolean containsChild(String e) {
 		return this.children.contains(new ComTreeNode(e));
 	}
 	
+	/**
+	 * gets a reference to the node object with name e that is a child of this node
+	 * @param e
+	 * @return
+	 */
 	ComTreeNode getChild(String e) {
 		int index = this.children.indexOf(new ComTreeNode(e));
 		return index == -1 ? null : this.children.get(index);
 	}
 	
+	/**
+	 * commands are equal if they have the same name.
+	 */
 	public boolean equals(Object o) {
 		if (o instanceof ComTreeNode) {
 			if (((ComTreeNode) o).getName() == null) {
@@ -96,10 +126,18 @@ class ComTreeNode {
 		this.id = id;
 	}
 	
+	/**
+	 * getter for help text
+	 * @return
+	 */
 	public String getHelp() {
 		return helpText;
 	}
 	
+	/**
+	 * setter for help text
+	 * @param helpText
+	 */
 	public void setHelp(String helpText) {
 		this.helpText = helpText;
 	}

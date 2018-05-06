@@ -1,32 +1,23 @@
 package priorityQ;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-import commands.Commands;
+import commands.*;
 
-import static priorityQ.Runner.readLines;
-
-public class Run extends allProjects.Runner {
+public class DeprecatedRunner {
 	
-	private static String FIRST = "Bob";
-	private static String LAST = "Bubkiss";
+	public final static String FIRST = "Bill";
+	public final static String LAST = "Bubkiss";
+	private static boolean run = true;
 	
-	private PriorityQueue<Patient> pQ;
-	private Commands commands;
-	private BufferedReader consoleLine;
-	
-	public static void main(String...args) {
-		launch(args);
-	}
-
-	@Override
-	public void start(String... args) throws InterruptedException, IOException {
+	public static void main(String...strings ) throws IOException {
+		PriorityQueue<Patient> pQ = new PriorityQueue<Patient>();
 		
-		pQ = new PriorityQueue<Patient>();
-			
-		commands = new Commands();
+		Commands commands = new Commands();
 		commands.addGraph(readLines("in/priorityQCommands.txt"));
 		commands.setCommand(1, new PatientCommand(pQ,"Integer") {@Override
 			public void execute(Object... elist) {
@@ -45,7 +36,7 @@ public class Run extends allProjects.Runner {
 				System.out.println(this.getObject().front().toString());
 			}});
 		
-		commands.setCommand(4, e -> this.quit());
+		commands.setCommand(4, e -> DeprecatedRunner.quit());
 		
 		commands.setCommand(5, new PatientCommand(pQ,"String","String","Integer") {@Override
 			public void execute(Object... elist) {
@@ -56,24 +47,29 @@ public class Run extends allProjects.Runner {
 			System.out.println("Patient " + last + ", " + first + " added, with PLevel: " + priority + ".");
 		}});
 		
-		consoleLine = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader consoleLine = new BufferedReader(new InputStreamReader(System.in));
+		String in;
 		
-		// TODO Auto-generated method stub
-		this.runLoop();
+		while (run) {
+			in = consoleLine.readLine();
+			commands.input(in);
+		}
 	}
 	
-	@Override
-	public void runnable(Object... obs) {
-		try {
-			String in = consoleLine.readLine();
-			commands.input(in);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
+	public static void quit() {
+		run = false;
 	}
-
+	
+	public static String[] readLines(String document) throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(document));
+		ArrayList<String> output = new ArrayList<String>();
+		
+		String inputString = reader.readLine();
+		while(inputString != null) {
+			output.add(inputString);
+			inputString = reader.readLine();
+		}
+		reader.close();
+		return output.toArray(new String[output.size()]);
+	}
 }

@@ -22,27 +22,6 @@ class CommandList {
 	}
 	
 	/**
-	 * Takes formatted command graph, and creates a graph of commands
-	 * 
-	 * Format:
-	 * ------------
-	 * 
-	Command:1
-		SubCommand1:2,3
-			SubSubCommand1
-				SubSubSubCommand1
-			SubSubCommand2
-		SubCommand2
-			SubSubCommand1
-	Command2
-	Null
-		HiddenCommand1
-			HiddenSubCommand2
-		HiddenCommand2
-	 */
-	
-	
-	/**
 	 * Begins the recursion to create the command tree based off of a formatted String array
 	 * @param commands the array of strings that represents the command tree
 	 */
@@ -99,8 +78,10 @@ class CommandList {
 		String command = (raw.substring(1).equals("null") || raw.substring(1).trim().equals("")) ? null : raw.substring(1).trim();
 		if (command == null) 
 			return new String[] {null};
-		String[] out = command.split("\\s*-\\s*",2);
+		String[] out = command.split("\\s*;\\s*",2);
 		if (out.length > 1) {
+			
+			out[1] = (out[1].trim().equals("") ? null : out[1].trim());
 			out = Util.append(out[0].split(":",2), out[1]);
 		} else {
 			out = out[0].split(":",2);
@@ -116,14 +97,14 @@ class CommandList {
 		if (command.length >= 3) {// in form name:ints - helptext
 			if (isNumber(command[1])) {
 				parent.getChild(command[0]).setID(Integer.parseInt(command[1]));
-				coms.put(Integer.parseInt(command[1]), new NullC());
+				addCommand(Integer.parseInt(command[1]), new NullC());
 			}
 			parent.getChild(command[0]).setHelp(command[2]);
 		} else if (command.length == 2){
 			parent.addChild(command[0]);
-			if(isNumber(command[1])) {
-				parent.getChild(command[0]).setID(Integer.parseInt(command[1]));
-				coms.put(Integer.parseInt(command[1]), new NullC());
+			if(isNumber(command[1].trim())) {
+				parent.getChild(command[0]).setID(Integer.parseInt(command[1].trim()));
+				addCommand(Integer.parseInt(command[1].trim()), new NullC());
 			} else {
 				parent.getChild(command[0]).setHelp(command[1]);
 			}
@@ -143,16 +124,22 @@ class CommandList {
 		coms.put(count, command);
 	}
 	
+	void addCommand(Integer label, Command command) {
+		if (command == null)
+			throw new CommandConfigurationException("The command object cannot be null.");
+		if (label.intValue() < 0)
+			throw new IllegalArgumentException("Cannot have a negative ID.");
+		coms.put(label,  command);
+	}
+	
 	/**
 	 * adds functionality to a point on the command tree. Only adds to points that already exist.
 	 * @param label
 	 * @param command
 	 */
-	void addCommand(Integer label, Command command) {
+	void setCommand(Integer label, Command command) {
 		if (command == null)
 			throw new CommandConfigurationException("The command object cannot be null.");
-		if (label < 0)
-			throw new IllegalArgumentException("Cannot have a negative ID.");
 		coms.replace(label, command);
 	}
 	

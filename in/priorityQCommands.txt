@@ -1,5 +1,5 @@
-add:1
-	patient:5
-getnext:2
-front:3
-quit:4
+add:1; Add a patient by queue number a default patient is added to queue.
+	patient:5; Adds a patient. Takes <firstName> <lastName> <priorityInteger> arguments and adds to queue.
+getnext:2; dequeues a patient from the queue and outputs it.
+front:3; displays the next patient in the queue, without taking them out.
+quit:4; quits the program.

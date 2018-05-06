@@ -1,7 +1,7 @@
 package commands;
 
 /**
- * Tree class
+ * Represents command tree data structure. Includes methods to add to a single level or through a single path.
  * @author Alyer
  *
  * @param <E> data type that the tree holds
@@ -15,18 +15,21 @@ class ComTree {
 		root = new ComTreeNode("Root");
 	}
 	
+	/**
+	 * adds a path of nodes based on a string of node names
+	 * @param elist
+	 */
 	public void addPath(String[] elist) {
 		addPath(elist, null);
 	}
 	
+	/**
+	 * getter for the root node
+	 * @return the root node
+	 */
 	public ComTreeNode getRoot() {
 		return root;
 	}
-	
-	void setRoot(ComTreeNode root) {
-		this.root = root;
-	}
-	
 	
 	/**
 	 * adds a path in the tree that includes all elements of e, in order
@@ -60,6 +63,9 @@ class ComTree {
 		}
 	}
 	
+	/**
+	 * returns the annotated structure of this command tree
+	 */
 	public String toString() {
 		String childs = "";
 		for (int x = 0; x < root.getChildren().size(); x++) {
