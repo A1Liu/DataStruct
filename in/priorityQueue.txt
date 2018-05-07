@@ -1,0 +1,12 @@
+add al1 1
+add al2 4
+add al3 1
+add al4 2
+add al5 1
+dequeue
+dequeue
+dequeue
+dequeue
+dequeue
+dequeue
+dequeue

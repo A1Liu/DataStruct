@@ -5,10 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-
-import commands.*;
 
 public class DeprecatedRunner {
 	
@@ -18,7 +15,7 @@ public class DeprecatedRunner {
 	private final static String DEQUEUE = "dequeue";
 	private final static String FRONT = "front";
 	private final static String QUIT = "quit";
-	private final static String DRIVER_NAME = "";
+	private final static String DRIVER_NAME = "in/priorityQueue.txt";
 	private static PriorityQueue<Patient> pQ;
 	private static boolean run = true;
 	
@@ -31,12 +28,14 @@ public class DeprecatedRunner {
 			inputLine = new BufferedReader(new InputStreamReader(System.in));
 		}
 
-
+		String in = inputLine.readLine();
 		while(run) {
-			String[] in = inputLine.readLine().trim().split("\\s+");
-			switch(in[0]) {
+			
+			String[] input = in.trim().split("\\s+");
+			switch(input[0]) {
 			case ADD:
-				try{add(Arrays.copyOfRange(in, 1, in.length));}catch(IndexOutOfBoundsException e) {System.out.println(ADD + " needs at least 1 argument!");}
+				try{add(Arrays.copyOfRange(input, 1, input.length));}catch(IndexOutOfBoundsException e) {System.out.println(ADD + " needs at least 1 argument!");}
+				System.out.println(pQ.toString());
 				break;
 			case DEQUEUE:
 				System.out.println(pQ.isEmpty() ? "No more patients in queue!" : "Now seeing: " + pQ.dequeue().toString());
@@ -50,6 +49,10 @@ public class DeprecatedRunner {
 			default:
 				System.out.println("That's not a valid comamnd!");
 			}
+			
+			in = inputLine.readLine();
+			if (run == true)
+				run = in != null;
 		}
 	}
 	
@@ -58,22 +61,25 @@ public class DeprecatedRunner {
 	 * @param strings the inputs to take.
 	 */
 	private static void add(String ...strings) {
-		int priority = 0;
+		int priority = -1;
 		String first = FIRST;
 		String last = LAST;
 		boolean firstDone = false;
+		boolean lastDone = false;
 		for (int x = 0; x < strings.length; x++) {
-			if (isNumber(strings[x])) {
-				priority = Integer.parseInt(strings[0]);
+			if (isNumber(strings[x]) && priority == -1) {
+				priority = Integer.parseInt(strings[x]);
+			} else if (!lastDone) {
+				last = strings[x];
+				lastDone = true;
 			} else if (!firstDone) {
 				first = strings[x];
 				firstDone = true;
-			} else {
-				last = strings[x];
-				x = strings.length;	
 			}
 		}
+		priority = priority == -1 ? 0 : priority;
 		pQ.enqueue(new Patient(first,last,priority));
+		System.out.printf("New Patient '%s, %s' added with PLevel: %d.%n", last, first, priority);
 	}
 	
 	/**

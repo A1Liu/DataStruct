@@ -44,7 +44,7 @@ public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 		E output = this.front();//Get the top of the heap
 		set(0, elements.remove(size()-1));//replace the top of the heap with the most recently added node
 		int index = 0;
-		int leftI =index*2 + 1;
+		int leftI = 1;
 		while(leftI < size()) {//parent still has children
 			if (leftI + 1 < size()) {//Parent has 2 children
 				E left = get(leftI);
@@ -82,6 +82,14 @@ public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 		} else {
 			return size();//exit and finish cascade
 		}
+	}
+	
+	public String toString() {
+		String out = "[";
+		for (E e : elements) {
+			out+=e.toString() + " | ";
+		}
+		return out + "\n";
 	}
 	
 	/**

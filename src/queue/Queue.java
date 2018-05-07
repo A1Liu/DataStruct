@@ -37,6 +37,4 @@ public interface Queue<T> {
 	public boolean isEmpty();
 	
 	//public T[] dumpAll();
-	
-	//public void empty();
 }

@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import commands.Commands;
+import commands.ObjParamC;
 import runner.LoopRunner;
 
 public class Runner extends LoopRunner {
@@ -84,4 +85,18 @@ public class Runner extends LoopRunner {
 		return output.toArray(new String[output.size()]);
 	}
 
+}
+
+abstract class PatientCommand extends ObjParamC<PriorityQueue<Patient>> {
+	
+	private int counter;
+	
+	PatientCommand(PriorityQueue<Patient> priorityQueue, String... strings) {
+		super(priorityQueue, strings);
+		counter = 0;
+	}
+	
+	public int getCounter() {
+		return ++counter;
+	}
 }
