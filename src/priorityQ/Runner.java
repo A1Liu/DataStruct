@@ -58,6 +58,7 @@ public class Runner extends LoopRunner {
 		}});
 		
 		consoleLine = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Welcome to the Priority Queue Program! Type 'help' to get a list of options.");
 	}
 
 	@Override
