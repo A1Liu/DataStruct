@@ -1,102 +1,121 @@
 package priorityQ;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.Arrays;
 
-import commands.Commands;
-import commands.ObjParamC;
-import runner.LoopRunner;
-
-public class Runner extends LoopRunner {
+/**
+ * Runner class.
+ * @author liu_albert
+ *
+ */
+public class Runner {
 	
-	private static String FIRST = "John";
-	private static String LAST = "Doe";
+	private final static String FIRST = "John";
+	private final static String LAST = "Doe";
+	private final static String ADD = "add";
+	private final static String DEQUEUE = "dequeue";
+	private final static String FRONT = "front";
+	private final static String QUIT = "quit";
 	
-	private PriorityQueue<Patient> pQ;
-	private Commands commands;
-	private BufferedReader consoleLine;
+	private final static String DRIVER_NAME = "in/PriorityQueueInput.txt";
 	
-	public static void main(String...args) {
-		launch(args);
-	}
-
-	@Override
-	public void atStart(Object... args) throws Exception {
-		//Make the queue and command tree,
-		pQ = new PriorityQueue<Patient>();
-		commands = new Commands();
-		commands.addGraph(readLines("in/priorityQCommands.txt"));
-
-		commands.setCommand(1, new PatientCommand(pQ,"Integer") {@Override
-			public void execute(Object... elist) {
-				Integer priority = (Integer) elist[0];
-				this.getObject().enqueue(new Patient(FIRST,LAST+getCounter(),priority));
-				System.out.println("Default patient with PLevel: " + priority + " added.");
-			}});
-		
-		commands.setCommand(2, new PatientCommand(pQ) {@Override
-			public void execute(Object... elist) {
-				System.out.println(this.getObject().dequeue().toString());
-			}});
-		
-		commands.setCommand(3, new PatientCommand(pQ) {@Override
-			public void execute(Object... elist) {
-				System.out.println(this.getObject().front().toString());
-			}});
-		
-		commands.setCommand(4, e -> this.quit());
-		
-		commands.setCommand(5, new PatientCommand(pQ,"String","String","Integer") {@Override
-			public void execute(Object... elist) {
-			String first = (String) elist[0];
-			String last = (String) elist[1];
-			Integer priority = (Integer) elist[2];
-			getObject().enqueue(new Patient(first, last, priority));
-			System.out.println("Patient '" + last + ", " + first + "' added, with PLevel: " + priority + ".");
-		}});
-		
-		consoleLine = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Welcome to the Priority Queue Program! Type 'help' to get a list of options.");
-	}
-
-	@Override
-	public void loop(Object... args) throws Exception {
-		commands.input(consoleLine.readLine());
-	}
-
-	@Override
-	public void atEnd(Object... args) throws Exception {
-		System.out.println("Thanks for using the priorityQueue program!");
-	}
-
-	public static String[] readLines(String document) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(document));
-		ArrayList<String> output = new ArrayList<String>();
-		
-		String inputString = reader.readLine();
-		while(inputString != null) {
-			output.add(inputString);
-			inputString = reader.readLine();
+	private static OrderedPQ<Patient> pQ;
+	
+	public static void main(String...strings ) throws IOException {
+		boolean run = true;
+		pQ = new OrderedPQ<Patient>();
+		BufferedReader inputLine;
+		try {
+			inputLine = new BufferedReader(new FileReader(DRIVER_NAME));
+		} catch (FileNotFoundException e) {
+			inputLine = new BufferedReader(new InputStreamReader(System.in));
 		}
-		reader.close();
-		return output.toArray(new String[output.size()]);
-	}
 
-}
-
-abstract class PatientCommand extends ObjParamC<PriorityQueue<Patient>> {
-	
-	private int counter;
-	
-	PatientCommand(PriorityQueue<Patient> priorityQueue, String... strings) {
-		super(priorityQueue, strings);
-		counter = 0;
+		String in = inputLine.readLine().trim();
+		while(run) {
+			
+			String[] input = in.trim().split("\\s+");
+			switch(input[0].toLowerCase()) {
+			case ADD:
+				try{add(Arrays.copyOfRange(input, 1, input.length));}catch(IndexOutOfBoundsException e) {System.out.printf("'%s' needs at least 1 argument!%n",ADD);}
+				break;
+			case DEQUEUE:
+				dequeue(input);
+				break;
+			case FRONT:
+				System.out.println(pQ.isEmpty() ? "   No more patients in queue!" : "   Next patient in line is: " + pQ.front().toString());
+				break;
+			case QUIT:
+				run = false;
+				break;
+			default:
+				System.out.println("That's not a valid comamnd!");
+			}
+			
+			in = inputLine.readLine();
+			if (run == true)
+				run = in != null;
+		}
 	}
 	
-	public int getCounter() {
-		return ++counter;
+	/**
+	 * Enqueues a patient to the priority queue.
+	 * @param strings the inputs to take.
+	 */
+	private static void add(String ...strings) {
+		int priority = -1;
+		String first = FIRST;
+		String last = LAST;
+		boolean firstDone = false;
+		boolean lastDone = false;
+		for (int x = 0; x < strings.length; x++) {
+			if (isNumber(strings[x]) && priority == -1) {
+				priority = Integer.parseInt(strings[x]);
+			} else if (!lastDone) {
+				last = strings[x];
+				lastDone = true;
+			} else if (!firstDone) {
+				first = strings[x];
+				firstDone = true;
+			}
+		}
+		priority = priority == -1 ? 10 : priority;
+		pQ.enqueue(new Patient(first,last,priority));
+		System.out.printf("New Patient '%s, %s' added with PLevel: %d.%n", last, first, priority);
+	}
+	
+	/**
+	 * Dequeue from priority queue. 
+	 * @param strings
+	 */
+	public static void dequeue(String...strings) {
+		if (strings.length > 1 && isNumber(strings[1]))
+			for (int x = 0; x < Integer.parseInt(strings[1]); x++) {
+				System.out.println(pQ.isEmpty() ? "   No more patients in queue!" : "   Now seeing: " + pQ.dequeue().toString());
+			}
+		else {
+			System.out.println(pQ.isEmpty() ? "   No more patients in queue!" : "   Now seeing: " + pQ.dequeue().toString());
+		}
+				
+			
+		
+	}
+	
+	/**
+	 * checks if a string is an integer
+	 * @param in string to test
+	 * @return true if the string can be parsed to an integer
+	 */
+	public static boolean isNumber(String in) {
+		try{
+			Integer.parseInt(in);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 }

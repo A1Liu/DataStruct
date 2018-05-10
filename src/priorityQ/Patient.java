@@ -1,5 +1,11 @@
 package priorityQ;
 
+/**
+ * This class represents a patient object in the queue.
+ * 
+ * @author liu_albert
+ *
+ */
 public class Patient implements Comparable<Patient> {
 	private String first;
 	private String last;

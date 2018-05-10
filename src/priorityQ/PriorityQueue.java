@@ -3,6 +3,14 @@ package priorityQ;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+/**
+ * <p>
+ * This class represents an implementation of the Queue interface that prioritizes smaller values using compareTo.
+ * </p>
+ * @author liu_albert
+ *
+ * @param <E>
+ */
 public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 
 	ArrayList<E> elements;//element in index i has children in indices 2*i and 2*i + 1
@@ -16,7 +24,7 @@ public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 	public void enqueue(E e) {
 		int index = size();
 		elements.add(e);
-		while (index > 0 && get(index).compareTo(get(index/2)) > 0) {
+		while (index > 0 && get(index).compareTo(get(index/2)) < 0) {
 			E plcHldr = get(index);
 			set(index, get(index/2));
 			set(index/2, plcHldr);
@@ -49,9 +57,9 @@ public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 			if (leftI + 1 < size()) {//Parent has 2 children
 				E left = get(leftI);
 				E right = get(leftI+1);
-				if (left.compareTo(right) < 0) {//right is bigger
+				if (left.compareTo(right) > 0) {//right is smaller
 					index = swap(index, leftI+1);
-				} else {//left is bigger or equal to right.
+				} else {//left is smaller or equal to right.
 					index = swap(index,leftI);
 				}
 			} else {//parent has 1 child
@@ -75,21 +83,13 @@ public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 	 */
 	private int swap(int parentIndex, int childIndex) {
 		E parent = get(parentIndex);
-		if (parent.compareTo(get(childIndex)) <= 0) {
+		if (parent.compareTo(get(childIndex)) > 0) {
 			set(parentIndex, get(childIndex));
 			set(childIndex, parent);
 			return childIndex;
 		} else {
 			return size();//exit and finish cascade
 		}
-	}
-	
-	public String toString() {
-		String out = "[";
-		for (E e : elements) {
-			out+=e.toString() + " | ";
-		}
-		return out + "\n";
 	}
 	
 	/**
@@ -117,4 +117,12 @@ public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 	private int size() {
 		return elements.size();
 	}
+	
+//	public String toString() {
+//		String out = "[";
+//		for (E e : elements) {
+//			out+=e.toString() + " | ";
+//		}
+//		return out + "\n";
+//	}
 }

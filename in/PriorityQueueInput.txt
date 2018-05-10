@@ -1,0 +1,31 @@
+add Zoe Field 10
+add Suzy Queue 5
+add Ura Nerd 9
+add Cal Kulate 5
+add Closda Windoes 1
+add Blaise Pascal 2
+add Sally Field 3
+add Qwerty Keys 4
+add Linc List 9
+add Ima Geek 1
+dequeue 7
+add Electromagnetic Field 8
+add Zoe Guest 7
+add Sally Guest 2
+add April Field 1
+add Asdfgh Keys 10
+add Mike Rochip 10
+add Amy Rochip 10
+add Didja Windoes 8
+add Data Field 4
+add Howard Yadoing 3
+dequeue 5
+add Alice Ardvaark 6
+add Genevieve Stapos 10
+add Abe Ardvaark 1
+add Doyour Math 2
+add Iluv Math 2
+dequeue 3
+add Sally Pascal 9
+dequeue 12
+Quit
