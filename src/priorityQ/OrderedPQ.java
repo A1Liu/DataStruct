@@ -19,7 +19,6 @@ public class OrderedPQ<E extends Comparable<E>> implements Queue<E> {
 	private int count;
 	private PriorityQueue<PQueueElem<E>> pQ;
 	
-	
 	OrderedPQ() {
 		count = 0;
 		pQ = new PriorityQueue<PQueueElem<E>>();
