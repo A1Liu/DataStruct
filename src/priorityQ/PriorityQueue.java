@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 /**
  * <p>
- * This class represents an implementation of the Queue interface that prioritizes smaller values using compareTo.
+ * This class represents an implementation of the Queue interface that prioritizes smaller values using compareTo -- Elements with a lower numerical priority are dequeued first.
  * </p>
  * @author liu_albert
  *
