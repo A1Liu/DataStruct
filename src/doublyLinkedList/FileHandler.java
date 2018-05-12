@@ -3,9 +3,9 @@ import java.io.*;
 
 public class FileHandler {
 	
-	public DoublyLinkedList<Person> list;
+	private DoubleLinkedList<Person> list;
 	
-	public FileHandler() {list = new DoublyLinkedList<Person>();}
+	public FileHandler() {list = new DoubleLinkedList<Person>();}
 	
 	/**
 	 * Parses a formatted input string into a Person object
@@ -38,7 +38,10 @@ public class FileHandler {
 		int line = 1;
 		while(inputString != null) {
 			if(!inputString.equals("") && rowHandler(inputString) != null) {
-				list.addElement(rowHandler(inputString),rowHandler(inputString).getLastName().compareTo("m")<0);
+				if (rowHandler(inputString).getLastName().compareTo("M")<0) {
+					list.add(rowHandler(inputString));
+				}else list.addFromBack(rowHandler(inputString));
+				//,
 			} else if (!inputString.equals("") && rowHandler(inputString) == null) {
 				System.out.println("Skipped line " + line + ": incorrect number of arguments.");
 			}
@@ -47,6 +50,10 @@ public class FileHandler {
 			line++;
 		}
 		inFile.close();
+	}
+	
+	public DoubleLinkedList<Person> getList() {
+		return list;
 	}
 	
 }

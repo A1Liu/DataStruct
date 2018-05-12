@@ -83,13 +83,25 @@ public class Person implements Comparable<Person> {
 		this.employer = employer;
 	}
 	
+	public boolean equals(Object o) {
+		if (o instanceof Person) {
+			Person other = ((Person) o);
+			if (other.getEmployer().equals(employer) && other.getFirstName().equals(firstName) && other.getLastName().equals(lastName))
+				return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * compareTo method for Person objects
 	 * @param e the person to compare to
 	 * @return an integer that describes the displacement of this person's last name relative to another person's
 	 */
 	public int compareTo(Person e) {
-		return (this.getLastName()+this.getFirstName()).toLowerCase().compareTo((e.getLastName()+e.getFirstName()).toLowerCase());
+		int compare = this.getLastName().compareTo(e.getLastName());
+		if (compare == 0) {
+			return this.getFirstName().compareTo(e.getFirstName());
+		} else return compare;
 	}
 	
 	/**

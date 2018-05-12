@@ -1,16 +1,14 @@
 package linkedList;
 
+/**
+ * 
+ * @author aliu
+ *
+ * @param <E>
+ */
 public class LinkedList<E extends Comparable<E>> {
 
 	private ListNode<E> front;
-	
-	/**
-	 * constructor for list with 1 element
-	 * @param e first element of list
-	 */
-	public LinkedList(E e) {
-		front = new ListNode<E>(e);
-	}
 	
 	/**
 	 * default constructor for empty list
@@ -20,29 +18,13 @@ public class LinkedList<E extends Comparable<E>> {
 	}
 	
 	/**
-	 * gets the first element of the list
-	 * @return the reference to the first node in the list
-	 */
-	public ListNode<E> getFront() {
-		return front;
-	}
-	
-	/**
-	 * setter for the first element of the list
-	 * @param e the new first element
-	 */
-	public void setFront(ListNode<E> e) {
-		front = e;
-	}
-	
-	/**
 	 * 
 	 * @param e the number we need to add or remove
 	 * @return the position of that number, or null if it isn't in there
 	 */
 	public ListNode<E> insertTo(E e) {
 		ListNode<E> current = front;
-		while(current.getNext() != null && current.getNext().compareTo(e)==-1) {
+		while(current.getNext() != null && current.getNext().compareTo(e)<0) {
 			current = current.getNext();
 		}
 		return current;
@@ -58,7 +40,7 @@ public class LinkedList<E extends Comparable<E>> {
 
 		if(front == null){
 			front = insert;
-		} else if (front.getData().compareTo(e) == 1) {
+		} else if (front.getData().compareTo(e) > 0) {
 			insert.setNext(front);
 			front = insert;
 		} else if (front.getData().equals(e)) {
@@ -100,6 +82,22 @@ public class LinkedList<E extends Comparable<E>> {
 		}
 			return 0;
 	}
+	
+	/**
+	 * gets the first element of the list
+	 * @return the reference to the first node in the list
+	 */
+	public ListNode<E> getFront() {
+		return front;
+	}
+	
+	/**
+	 * setter for the first element of the list
+	 * @param e the new first element
+	 */
+	public void setFront(ListNode<E> e) {
+		front = e;
+	}
 
 	/**
 	 * returns the contents of the list in string form
@@ -128,75 +126,9 @@ public class LinkedList<E extends Comparable<E>> {
 			front = reverseThis;
 			return;
 		}
-			reverseList(reverseThis.getNext());
-			reverseThis.getNext().setNext(reverseThis);
-			reverseThis.setNext(null);
+		reverseList(reverseThis.getNext());
+		reverseThis.getNext().setNext(reverseThis);
+		reverseThis.setNext(null);
 	}
-	
-	/*
-	 *Test:
-add
-You're now in 'add' mode. Typing numbers into the command line will now add them to the list.
-1
-2
-3
-4
-4
-That number is already in the list!
-56
-23
-45
-2345
-234
-5
-324That number is already in the list!
-5
-23
-45That number is already in the list!
-
-23That number is already in the list!
-5
-4325
-print
-[1, 2, 3, 4, 5, 23, 45, 56, 234, 235, 2345, 3245, 4325]
-reverse
-print
-[4325, 3245, 2345, 235, 234, 56, 45, 23, 5, 4, 3, 2, 1]
-	 * 
-	 */
-	
-	
-	
-	
-	
-	
-	/*	/**
-	 * finds the node in the list that points to the element e
-	 * @param e element that we're looking for
-	 * @return the reference to the node that points to the node containing e
-	 * /
-	public ListNode<E> findPrevious(E e) {
-		ListNode<E> current = front;
-		while(current.getNext() != null && current.getNext().compareTo(e)!=0) {
-			current = current.getNext();
-		}
-		return current;
-	}
-*/	
-
-	/*/**
-	 * finds the node in the list that contains e
-	 * @param e element that we're looking for
-	 * @return the reference to the node that contains e
-	 * /
-	public ListNode<E> findElement(E e) {
-		ListNode<E> current = front;
-		if(current != null) {
-			if(current.compareTo(e) == 0) {
-				return current;
-			} else return findPrevious(e).getNext();
-		} else return null;
-	}
-	*/
 
 }

@@ -1,5 +1,10 @@
 package linkedList;
 
+/**
+ * 
+ * @author aliu
+ *
+ */
 public class UserInputHandler {
 	public LinkedList<Integer> list = new LinkedList<Integer>();
 
