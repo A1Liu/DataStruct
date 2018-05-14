@@ -24,11 +24,11 @@ public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 	public void enqueue(E e) {
 		int index = size();
 		elements.add(e);
-		while (index > 0 && get(index).compareTo(get(index/2)) < 0) {
+		while (index > 0 && get(index).compareTo(get((index-1)/2)) < 0) {
 			E plcHldr = get(index);
-			set(index, get(index/2));
-			set(index/2, plcHldr);
-			index /= 2;
+			set(index, get((index-1)/2));
+			set((index-1)/2, plcHldr);
+			index =(index-1) /2;
 		}
 	}
 
