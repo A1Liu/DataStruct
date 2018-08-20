@@ -6,11 +6,10 @@ public class Runner {
 		// TODO Auto-generated method stub
 		
 		//Create sorter
-		RadixSorter albert = new RadixSorter();
-
+		QuickSorter albert = new QuickSorter();
 		
 		//Test sorter
-		System.out.println(albert.testSort(10, false, true, true));
+		System.out.println(albert.testSort(100, true));
 		
 		
 		

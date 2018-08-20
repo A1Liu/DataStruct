@@ -4,9 +4,7 @@ import java.util.ArrayList;
 public class RadixSorter extends SorterClass {
 	
 	public RadixSorter() {
-		comps = 0;
-		swaps = 0;
-		sortName = "Radix Sort";
+		super("Radix Sort");
 	}
 	
 	/**

@@ -7,49 +7,14 @@ public abstract class SorterClass {
 	protected int swaps;
 	protected String sortName;
 	
-	public SorterClass() {
+	public SorterClass(String sortName) {
 		comps = 0;
 		swaps = 0;
-		sortName = "Default";
+		this.sortName = sortName;
 	}
-	
+
 	/**
-	 * @param numberList. The list that needs to get swapped.
-	 * @param firstIndex. The index of first number that needs to get swapped.
-	 * @param secondIndex. The index of second number that needs to be swapped.
-	 * @return The list after the swapping.
-	 */
-	public static int[] swapTwo(int[] numberList,int firstIndex, int secondIndex) {
-			int temp = numberList[firstIndex];
-			numberList[firstIndex] = numberList[secondIndex];
-			numberList[secondIndex] = temp;
-			return numberList;	
-		}
-	
-	/**
-	 * @param firstNum First number to be compared
-	 * @param secondNum Second number to be compared
-	 * @param biggerThan Whether we wanna know if the first number is bigger or less than the second
-	 * @return true if first is bigger, false if lesser. If biggerThan is false, then true if lesser, false if bigger.
-	 */
-	public static boolean compareTwo(int firstNum, int secondNum, boolean biggerThan) {
-		if(firstNum > secondNum) {
-			return biggerThan;
-		} else {return !biggerThan;}
-	}
-	
-	/**
-	 * @param firstNum First number to be compared
-	 * @param secondNum Second number to be compared
-	 * @return true if first is bigger, false if first is lesser.
-	 */
-	public static boolean compareTwo(int firstNum, int secondNum) {
-		if(firstNum > secondNum) {
-			return true;
-		} else {return false;}
-	}
-	
-	/**
+	 * Returns an array of ints as a string
 	 * @param numbers  array
 	 * @return the array as a string
 	 */
@@ -62,6 +27,7 @@ public abstract class SorterClass {
 	}
 	
 	/**
+	 * Builds an unsorted array of random integers
 	 * @param length  length of the array to be built
 	 * @param lowerBound  lower bound of the random numbers
 	 * @param upperBound  upper bound of the random numbers
@@ -76,6 +42,7 @@ public abstract class SorterClass {
 	}
 	
 	/**
+	 * Builds a sorted array
 	 * @param length  length of the array to be built
 	 * @param increasing  whether the array should be in increasing order
 	 * @return  an array
@@ -92,6 +59,51 @@ public abstract class SorterClass {
 		return numbers;
 	}
 	
+	
+	/**
+	 * Public method to sort an array of integers
+	 * @param numbers integer array to sort
+	 * @param increasing whether to sort increasing or decreasing order
+	 * @return the array in increasing or decreasing order
+	 */
+	public final int[] sort(int[] numbers, boolean increasing) {
+		swaps = 0; comps = 0;
+		return sortArray(numbers, increasing);
+	}
+	
+	/**
+	 * Sorts the array in place and returns it. This is the method to override when creating new sorts
+	 * @param numbers  array to be sorted
+	 * @param increasing  whether the sort should be in increasing order
+	 * @return
+	 */
+	int[] sortArray(int[] numbers, boolean increasing) {
+		return numbers;
+	}
+	
+	/**
+	 * Tests the sort on a number of different input types
+	 * @param length length of the arrays to test the sort with
+	 * @param output if true, include the array values in the string
+	 * @return an output string with results of the test (comparisons and swaps)
+	 */
+	public String testSort(int length, boolean output) {
+		String outString = "Testing "+sortName+" on Arrays of Length "+length;
+		int[] testArray = buildArray(length,0,10);
+		int[] sortedArray = sort(Arrays.copyOf(testArray,testArray.length),true);
+		outString+="\nRandom: \n  Comparisons: " + comps + " | Swaps: " + swaps;
+		if(output) {outString+="\n  Unsorted Array: " + toString(testArray) + "\n    Sorted Array: " + toString(sortedArray);}
+		testArray = buildArray(length,true);
+		sortedArray = sort(Arrays.copyOf(testArray,testArray.length),true);
+		outString+="\nAscending: \n  Comparisons: " + comps + " | Swaps: " + swaps;
+		if(output) {outString+="\n  Unsorted Array: " + toString(testArray) + "\n    Sorted Array: " + toString(sortedArray);}
+		testArray = buildArray(length,false);
+		sortedArray = sort(Arrays.copyOf(testArray,testArray.length),true);
+		outString+="\nDescending: \n  Comparisons: " + comps + " | Swaps: " + swaps;
+		if(output) {outString+="\n  Unsorted Array: " + toString(testArray) + "\n    Sorted Array: " + toString(sortedArray);}
+		return outString;
+	}
+	
 	/**
 	 * @return amount of comparisons
 	 */
@@ -102,49 +114,7 @@ public abstract class SorterClass {
 	/**
 	 * @return amount of swaps
 	 */
-	public int getSwaps( ) {
+	public int getSwaps() {
 		return swaps;
-	}
-	
-	/**
-	 * @param numbers  array to be sorted
-	 * @param increasing  whether the sort should be in increasing order
-	 * @return
-	 */
-	public int[] sortArray(int[] numbers, boolean increasing) {
-		return numbers;
-	}
-	
-	/**
-	 * @param length  length of the test array
-	 * @param incInput  whether the test array should be increasing
-	 * @param incOutput  whether the test sort should be increasing
-	 * @param output  whether the test should output the raw arrays before and after sorting
-	 * @return the output string of the test
-	 */
-	public String testSort(int length, boolean incInput, boolean incOutput, boolean output) {
-		int[] numbers = buildArray(length, incInput);
-		int[] numbersSorted = sortArray(Arrays.copyOf(numbers,numbers.length), incOutput);
-		String information = sortName + ", Array Length: " + length + "\nComparisons: " + comps + " | Swaps: " + swaps;
-		if(output) {
-			return information + "\nUnsorted Array: " + toString(numbers) + "\n  Sorted Array: " + toString(numbersSorted);
-		} else return information;
-	}
-	
-	/**
-	 * @param length  length of the test array
-	 * @param lowerBound  lower bound for random numbers
-	 * @param upperBound  upper bound for random numbers
-	 * @param incOutput  whether the test sort should be increasing
-	 * @param output  whether the test should output the raw arrays before and after sorting
-	 * @return the output string of the test
-	 */
-	public String testSort(int length, int lowerBound, int upperBound, boolean incOutput, boolean output) {
-		int[] numbers = buildArray(length, lowerBound, upperBound);
-		int[] numbersSorted = sortArray(Arrays.copyOf(numbers,numbers.length), incOutput);
-		String information = sortName + ", Array Length: " + length + "\nComparisons: " + comps + " | Swaps: " + swaps;
-		if(output) {
-			return information + "\nUnsorted Array: " + toString(numbers) + "\n  Sorted Array: " + toString(numbersSorted);
-		} else return information;
 	}
 }

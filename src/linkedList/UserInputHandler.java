@@ -94,7 +94,7 @@ public class UserInputHandler {
 	 */
 	public static boolean errorTrap(String input) {
 		try {
-			int number = Integer.parseInt(input);
+			Integer.parseInt(input);
 			return true;
 		} catch (NumberFormatException e) {
 			return false;

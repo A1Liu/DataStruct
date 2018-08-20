@@ -1,8 +1,5 @@
 package allProjects;
 
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-
 public abstract class Runner {
 
 	private boolean run;
@@ -11,6 +8,7 @@ public abstract class Runner {
 		run = true;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static void launch(String... args) {
         // Figure out the right class to call
         StackTraceElement[] cause = Thread.currentThread().getStackTrace();
