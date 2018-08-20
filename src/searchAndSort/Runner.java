@@ -6,7 +6,7 @@ public class Runner {
 		// TODO Auto-generated method stub
 		
 		//Create sorter
-		QuickSorter albert = new QuickSorter();
+		BubbleSorter albert = new BubbleSorter();
 		
 		//Test sorter
 		System.out.println(albert.testSort(100, true));

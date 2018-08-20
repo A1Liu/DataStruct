@@ -52,7 +52,6 @@ public class BubbleSorter extends SorterClass {
 			sentinel=false;
 		}
 		}
-		//problem before this line
 		return numbers;
 	}
 }
