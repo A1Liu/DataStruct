@@ -36,7 +36,7 @@ A bubble sort program that met the **[Quadratic Sorting Program](https://github.
 A quick sort program that met the **[Quick Sort Program](https://github.com/a2liu/datastruct/blob/master/Assignment%20List/QuickSort.md)** specifications.  
 
 #### Radix Sort
-A radix sort program that met the **[Radix Sort Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Radix%20Sort%20Assignment.md)** specifications.  
+A radix sort program that met the **[Radix Sort Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Radix%20Sort.md)** specifications.  
 
 ## Linked List Package
 A program that met the **[Linked List Program](https://github.com/A1Liu/DataStruct/blob/master/Assignment%20List/Linked%20List.md)** specifications.  
