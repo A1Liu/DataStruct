@@ -2,7 +2,9 @@ package calendar;
 
 public class CalendarDate {
 	
-	private int month;private int day;private int year;
+	private int month;
+	private int day;
+	private int year;
 	
 	/**
 	 * default constructor
@@ -38,13 +40,13 @@ public class CalendarDate {
 	 * @return true for if its valid, false when its not valid
 	 */
 	public boolean checkValid(int monthPar, int dayPar, int yearPar) {
-
-	boolean check = false;
-	
-	if (monthPar <=12 && monthPar >=1 && yearPar >=0 && dayPar>=1 && dayPar<=numDays(monthPar, yearPar)) {
-		check = true;
+	if (monthPar >12 || monthPar <1) {
+		return false;
 	}
-	return check;
+	if ( yearPar < 0 || dayPar < 1 || dayPar > numDays(monthPar, yearPar)) {
+		return false;
+	}
+	return true;
 	}
 	
 	/**
@@ -56,8 +58,11 @@ public class CalendarDate {
 		switch(monthPar)
 		{
 		case 2:
-			return 28 + leapYear(yearPar);
-		case 4:case 6:case 9:case 11:
+			return isLeapYear(yearPar) ? 29 : 28;
+		case 4:
+		case 6:
+		case 9:
+		case 11:
 			return 30;
 		default:
 			return 31;
@@ -66,20 +71,13 @@ public class CalendarDate {
 	
 	/**
 	 * @param yearPar
-	 * @return a 1 if the yearPar is a leap year
+	 * @return whether or not the year is a leap year
 	 */
-	public int leapYear(int yearPar) {
-		int leap = 0;
-		if ((yearPar % 4)==0) {
-			leap +=1;
-			if ((yearPar % 100) == 0) {
-				leap -=1;
-				if ((yearPar % 400) ==0) {
-					leap +=1;
-				}
-			}
-		}
-		return leap;
+	public boolean isLeapYear(int yearPar) {
+		if (yearPar % 400 == 0) return true;
+		if (yearPar % 100 == 0) return false;
+		if (yearPar % 4 == 0) return true;
+		return false;
 	}
 	
 	/**
@@ -88,8 +86,9 @@ public class CalendarDate {
 	 */
 	public String monthToString(int monthPar) {
 		final String[] monthList = {"January","February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-		if(monthPar<0 || monthPar >12)
-			{return "January";}
+		if(monthPar<0 || monthPar >12) {
+			return "January";
+		}
 		
 		return monthList[monthPar-1];
 	}
@@ -98,7 +97,7 @@ public class CalendarDate {
 	 * @return string of next date
 	 */
 	public String nextDate(){
-		int dayNext=day+1;int monthNext=month; int yearNext=year;
+		int dayNext=day+1; int monthNext=month; int yearNext=year;
 		if (day == numDays(month,year)) {
 			dayNext = 1;
 			monthNext = month+1;
